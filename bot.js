@@ -4,6 +4,8 @@ const Yuna = require("./src/client.js");
 // [[ Imports ]] const  = require('./src/commands/.js');
 const WarnCommand = require('./src/commands/warn.js');
 
+const bot = new Yuna();
+
 bot.once("ready", function () {
 	bot.user.setGame("Witchcraft | //help");
 
