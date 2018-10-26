@@ -9,7 +9,7 @@ bot.once("ready", function () {
 
 	const rawCommands = [
 		WarnCommand,
-  }
+  	];
   
 	bot.initializeCommands(rawCommands);
 	console.log("Ready to begin!");
