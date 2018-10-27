@@ -1,7 +1,6 @@
 const Command = require('../command.js');
-const VERSION = 'BETA 0.49_02';
 
-module.exports = class AllCommand extends Command{
+module.exports = class CommandsCommand extends Command{
 	constructor(bot){
 		super(bot, {
 			name: 'commands',
@@ -19,8 +18,8 @@ module.exports = class AllCommand extends Command{
 
 	process(msg, suffix){
     	const commands = this.bot.commands();
-    	var info = "More infomation about a specific command use `//command <Command Name>`\n"
-    		+ `__**Available Yuna ${VERSION} Commands:**__ \n\n`
+    	var info = "More infomation about a specific command use `/how <Command Name>`\n"
+    		+ `__**Available Yuna Commands:**__ \n\n`
 
     	for(var cmd in commands){
     		if (commands[cmd].hasPermission(msg)){
