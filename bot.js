@@ -17,7 +17,7 @@ bot.once("ready", function () {
   	];
   
 	bot.initializeCommands(rawCommands);
-	console.log("Ready to begin!");
+	mainChannel.send("Ready to begin!");
 });
 
 bot.on("message", function (msg) {
