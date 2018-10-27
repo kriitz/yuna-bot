@@ -6,7 +6,7 @@ const WarnCommand = require('./src/commands/warn.js');
 const WipeCommand = require('./src/commands/wipe.js');
 
 const bot = new Yuna();
-const mainChannel = bot.channels.get(505595460078272517);
+const mainChannel = bot.channels.map.get(505595460078272517);
 
 bot.once("ready", function () {
 	bot.user.setGame("Witchcraft | //help");
@@ -17,7 +17,7 @@ bot.once("ready", function () {
   	];
   
 	bot.initializeCommands(rawCommands);
-	bot.user.send("Ready to begin!");
+	mainChannel.send("Ready to begin!");
 });
 
 bot.on("message", function (msg) {
