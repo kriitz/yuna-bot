@@ -10,7 +10,7 @@ const mainChannel = bot.channels.find('id',505595460078272517);
 
 bot.once("ready", function () {
 	bot.user.setGame("Witchcraft | //help");
-	mainChannel.send("Ready to begin!");
+	bot.channels.first().send("Ready to begin!");
 	
 	const rawCommands = [
 		WarnCommand,
