@@ -6,6 +6,7 @@ const WarnCommand = require('./src/commands/warn.js');
 const WipeCommand = require('./src/commands/wipe.js');
 
 const bot = new Yuna();
+const mainChannel = bot.channels.get('505595460078272517');
 
 bot.once("ready", function () {
 	bot.user.setGame("Witchcraft | //help");
@@ -53,6 +54,17 @@ bot.on("message", function (msg) {
 			msg.reply("You mentioned me!");
 		}
     }
+});
+
+process.on('uncaughtException', function(err) {
+	if (err.code == 'ECONNRESET') {
+		console.log('Got an ECONNRESET! This is *probably* not an error. Stacktrace:');
+		mainChannel.send(err.stack);
+	} else {
+		mainChannel.send(err);
+		mainChannel.send(err.stack);
+		process.exit(0);
+	}
 });
 
 bot.login(process.env.BOT_TOKEN);
