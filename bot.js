@@ -2,23 +2,23 @@
 const Yuna = require("./src/client.js");
 
 // [[ Imports ]] const  = require('./src/commands/.js');
-const MkCharCommand = require('./src/commands/mkchar.js');
-const WarnCommand = require('./src/commands/warn.js');
+//const MkCharCommand = require('./src/commands/mkchar.js');
+//const WarnCommand = require('./src/commands/warn.js');
 
 const bot = new Yuna();
 var mainChannel = null;
 
 bot.once("ready", function () {
 	bot.user.setGame("Witchcraft | /help");
-	mainChannel = bot.guilds.get("393936202123968513").channels.find("name","bot");
+//	mainChannel = bot.guilds.get("393936202123968513").channels.find("name","bot");
 
 	const rawCommands = [
-		MkCharCommand,
-		WarnCommand,
+//		MkCharCommand,
+//		WarnCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
-	mainChannel.send("Ready to begin!");
+//	mainChannel.send("Ready to begin!");
 });
 
 const blockedWords = ["loli"];
