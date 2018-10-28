@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
+/*
 const firebase = require("firebase");
 
   const config = {
@@ -12,14 +13,14 @@ const firebase = require("firebase");
   };
 
 firebase.initializeApp(config);
-//var MemberData = require('./memberData.js');
+*/
 
 module.exports = class YunaClient extends Discord.Client {
 	constructor(options = {}){
 		super(options);
 		this.registry = {};
 
-		this.database = firebase.database();
+		//this.database = firebase.database();
 
 		this.on("warn", (m) => console.log("[warn]", m));
 
