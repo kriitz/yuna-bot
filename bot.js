@@ -10,7 +10,7 @@ var mainChannel = null;
 
 bot.once("ready", function () {
 	bot.user.setGame("Witchcraft | /help");
-//	mainChannel = bot.guilds.get("393936202123968513").channels.find("name","bot");
+	mainChannel = bot.guilds.get("393936202123968513").channels.find("name","bot");
 
 	const rawCommands = [
 //		MkCharCommand,
@@ -18,7 +18,7 @@ bot.once("ready", function () {
   	];
   
 	bot.initializeCommands(rawCommands);
-//	mainChannel.send("Ready to begin!");
+	mainChannel.send("Ready to begin!");
 });
 
 const blockedWords = ["loli"];
