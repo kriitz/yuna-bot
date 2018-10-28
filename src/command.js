@@ -5,6 +5,7 @@ module.exports = class Command{
 		this.usage = info.usage;
 		this.role = info.role;
 		this.options = info.options;
+		this.alias = info.alias;
 
 		this.bot = bot;
 	}
