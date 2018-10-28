@@ -2,32 +2,34 @@
 const Yuna = require("./src/client.js");
 
 // [[ Imports ]] const  = require('./src/commands/.js');
+const MkCharCommand = require('./src/commands/mkchar.js');
 const WarnCommand = require('./src/commands/warn.js');
-const WipeCommand = require('./src/commands/wipe.js');
 
 const bot = new Yuna();
-const mainChannel = bot.channels.find('id',505595460078272517);
+var mainChannel = null;
 
 bot.once("ready", function () {
-	bot.user.setGame("Witchcraft | //help");
-	bot.channels.first().send("Ready to begin!");
-	
+	bot.user.setGame("Witchcraft | /help");
+	mainChannel = bot.guilds.get("393936202123968513").channels.find("name","bot");
+
 	const rawCommands = [
+		MkCharCommand,
 		WarnCommand,
-		WipeCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
-	
+	mainChannel.send("Ready to begin!");
 });
+
+const blockedWords = ["loli"];
 
 bot.on("message", function (msg) {
 	if (msg.author == bot.user)
 		return
 
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
-		var cmdTxt = msg.content.split(" ")[0].substring(2);
-        var suffix = msg.content.substring(cmdTxt.length + 3);
+		var cmdTxt = msg.content.split(" ")[0].substring(1);
+        var suffix = msg.content.substring(cmdTxt.length + 2);
 		var cmd = bot.commands()[cmdTxt];
 
 		if(cmd){
@@ -36,7 +38,7 @@ bot.on("message", function (msg) {
 					const replyContent = cmd.process(msg, suffix);
 					if (replyContent) msg.reply(replyContent);
 				} catch(error){
-					console.log("Command " + cmdTxt + " failed. \n" + error.stack);
+					mainChannel.send("Command " + cmdTxt + " failed. \n" + error.stack);
 				}
 				console.log(cmdTxt + " command excuted.");						
 			}else{
@@ -47,7 +49,7 @@ bot.on("message", function (msg) {
 		if (msg.mentions.users.first() !== bot.user){
 			for (var index in blockedWords){
 				if(msg.content.toLowerCase().match(blockedWords[index])){
-					msg.reply("Your message was deleted, we do not condone dark humor or loliconic pictures on our server. \n\t" + msg.author.username + " you have been warned.")
+					msg.reply("Your message was deleted, we do not condone dark humor or loliconic on our server. \n\t" + msg.author.username + " you have been warned.")
 					msg.delete();
 				}	
 			}
@@ -68,4 +70,4 @@ process.on('uncaughtException', function(err) {
 	}
 });
 
-bot.login(process.env.BOT_TOKEN);
+bot.login("process.env.BOT_TOKEN");
