@@ -2,8 +2,8 @@
 const Yuna = require("./src/client.js");
 
 // [[ Imports ]] const  = require('./src/commands/.js');
-//const MkCharCommand = require('./src/commands/mkchar.js');
-//const WarnCommand = require('./src/commands/warn.js');
+const MkCharCommand = require('./src/commands/mkchar.js');
+const WarnCommand = require('./src/commands/warn.js');
 
 const bot = new Yuna();
 var mainChannel = null;
@@ -13,8 +13,8 @@ bot.once("ready", function () {
 	mainChannel = bot.guilds.get("393936202123968513").channels.find("name","bot");
 
 	const rawCommands = [
-//		MkCharCommand,
-//		WarnCommand,
+		MkCharCommand,
+		WarnCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
@@ -70,4 +70,4 @@ process.on('uncaughtException', function(err) {
 	}
 });
 
-bot.login("process.env.BOT_TOKEN");
+bot.login(process.env.BOT_TOKEN);
