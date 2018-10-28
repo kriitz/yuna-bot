@@ -4,6 +4,9 @@ module.exports = class WarnCommand extends Command{
 	constructor(bot){
 		super(bot, {
 			name: 'warn',
+			alias: [
+				'ping'
+			],
 			usage: '<Command Name>',
 			options: [
 				{name: 'r', value: 'Display the roles that can call this command'}
