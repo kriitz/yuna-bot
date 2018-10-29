@@ -1,5 +1,6 @@
 //
 const Yuna = require("./src/client.js");
+const cron = require("cron").CronJob;
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const MkCharCommand = require('./src/commands/mkchar.js');
@@ -7,6 +8,14 @@ const WarnCommand = require('./src/commands/warn.js');
 
 const bot = new Yuna();
 var mainChannel = null;
+
+// Cronjob
+new cron("0 * * ? * *",function(){
+	if (mainChannel !== null){
+		mainChannel.send("Cron");
+	}
+}, null, true, 'America/Los_Angeles');
+
 
 bot.once("ready", function () {
 	bot.user.setGame("Witchcraft | /help");
