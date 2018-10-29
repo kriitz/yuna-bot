@@ -21,16 +21,12 @@ bot.once("ready", function () {
 	bot.initializeCommands(rawCommands);
 	mainChannel.send("Ready to begin!");
 	mainChannel.send(cron);
-	/*
 	// Cronjob
-	const job = new cron("0 * * ? * *",function(){
-		if (mainChannel !== null){
-			mainChannel.send("Cron");
-		}
+	const job = new cron("* * * * * *",function(){
+		mainChannel.send("Cron");
 	});
 
 	job.start();	
-	*/
 });
 
 const blockedWords = ["loli"];
