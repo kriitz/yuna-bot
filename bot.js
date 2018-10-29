@@ -1,6 +1,6 @@
 //
 const Yuna = require("./src/client.js");
-//const cron = require("cron").CronJob;
+const cron = require("cron").CronJob;
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const MkCharCommand = require('./src/commands/mkchar.js');
@@ -20,6 +20,7 @@ bot.once("ready", function () {
   
 	bot.initializeCommands(rawCommands);
 	mainChannel.send("Ready to begin!");
+	mainChannel.send(cron);
 	/*
 	// Cronjob
 	const job = new cron("0 * * ? * *",function(){
