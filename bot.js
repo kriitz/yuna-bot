@@ -14,8 +14,9 @@ const job = new cron("0 * * ? * *",function(){
 	if (mainChannel !== null){
 		mainChannel.send("Cron");
 	}
-}, null, true, 'America/Los_Angeles');
+});
 
+job.start();
 
 bot.once("ready", function () {
 	bot.user.setGame("Witchcraft | /help");
