@@ -10,8 +10,10 @@ const bot = new Yuna();
 var mainChannel = null;
 
 bot.once("ready", function () {
+	const guild = bot.guilds.get("393936202123968513");
+	
 	bot.user.setGame("Witchcraft | /help");
-	mainChannel = bot.guilds.get("393936202123968513").channels.find("name","bot");
+	mainChannel = guild.channels.find("name","bot");
 	
 	const rawCommands = [
 		MkCharCommand,
@@ -20,10 +22,10 @@ bot.once("ready", function () {
   
 	bot.initializeCommands(rawCommands);
 	mainChannel.send("Ready to begin!");
-	mainChannel.send(cron);
+
 	// Cronjob
-	const job = new cron("* * * * * *",function(){
-		
+	const job = new cron("00 00 19 * * 1-7",function(){
+		mainChannel.send("New day reset! @everyone");
 	});
 
 	job.start();	
