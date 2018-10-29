@@ -9,19 +9,10 @@ const WarnCommand = require('./src/commands/warn.js');
 const bot = new Yuna();
 var mainChannel = null;
 
-// Cronjob
-const job = new cron("0 * * ? * *",function(){
-	if (mainChannel !== null){
-		mainChannel.send("Cron");
-	}
-});
-
-job.start();
-
 bot.once("ready", function () {
 	bot.user.setGame("Witchcraft | /help");
 	mainChannel = bot.guilds.get("393936202123968513").channels.find("name","bot");
-
+	
 	const rawCommands = [
 		MkCharCommand,
 		WarnCommand,
@@ -29,6 +20,16 @@ bot.once("ready", function () {
   
 	bot.initializeCommands(rawCommands);
 	mainChannel.send("Ready to begin!");
+	
+	// Cronjob
+	const job = new cron("0 * * ? * *",function(){
+		if (mainChannel !== null){
+			mainChannel.send("Cron");
+		}
+	});
+
+	job.start();	
+
 });
 
 const blockedWords = ["loli"];
