@@ -10,7 +10,7 @@ const bot = new Yuna();
 var mainChannel = null;
 
 // Cronjob
-new cron("0 * * ? * *",function(){
+const job = new cron("0 * * ? * *",function(){
 	if (mainChannel !== null){
 		mainChannel.send("Cron");
 	}
