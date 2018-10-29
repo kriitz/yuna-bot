@@ -2,6 +2,9 @@
 const Yuna = require("./src/client.js");
 const cron = require("cron").CronJob;
 
+// const
+const botId = '504996285900783638';
+
 // [[ Imports ]] const  = require('./src/commands/.js');
 const MkCharCommand = require('./src/commands/mkchar.js');
 const WarnCommand = require('./src/commands/warn.js');
@@ -11,6 +14,7 @@ var mainChannel = null;
 
 bot.once("ready", function () {
 	const guild = bot.guilds.get("393936202123968513");
+	const member = guild.members.get(botId);
 	
 	bot.user.setGame("Witchcraft | /help");
 	mainChannel = guild.channels.find("name","bot");
@@ -23,12 +27,20 @@ bot.once("ready", function () {
 	bot.initializeCommands(rawCommands);
 	mainChannel.send("Ready to begin!");
 
-	// Cronjob
-	const job = new cron("00 00 19 * * 1-7",function(){
-		mainChannel.send("New day reset! @everyone");
-	});
+	// Cronjobs
+	const dayReset = new cron("00 00 19 * * 1-7",function(){
+		const sayings = ["It's a new day, it's a new smile!"];
+		member.setNickname("Daily Reset - 12:00 UTC");
+		mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone");
+		member.setNickname("Yuna");
+	}, null, true, "America/Los_Angeles");
 
-	job.start();	
+	const weekReset = new cron('00 00 19 * * 5', function(){
+		const sayings = ["One week after the next, the grind continues"];
+		member.setNickname("Week Reset - Friday 12:00 UTC");
+		mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone");
+		member.setNickname("Yuna");
+	}, null, true, "America/Los_Angeles");
 });
 
 const blockedWords = ["loli"];
