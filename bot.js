@@ -23,7 +23,7 @@ bot.once("ready", function () {
 	mainChannel.send(cron);
 	// Cronjob
 	const job = new cron("* * * * * *",function(){
-		mainChannel.send("Cron");
+		
 	});
 
 	job.start();	
