@@ -57,7 +57,13 @@ const blockedWords = ["loli"];
 bot.on("message", function (msg) {
 	if (msg.author == bot.user)
 		return
-
+	if (msg.channel.name == "initialize" && ){
+		if (msg.author.id !== "89488149201326080" || msg.content.startsWith("/char") == false){
+			msg.delete();
+			return
+		}
+	}
+	
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
 	var cmdTxt = msg.content.split(" ")[0].substring(1);
         var suffix = msg.content.substring(cmdTxt.length + 2);
