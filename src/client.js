@@ -40,6 +40,7 @@ module.exports = class YunaClient extends Discord.Client {
 			const alias = command.get('alias');
 			for (let i in alias){
 				this.registry[alias[i]] = command;
+				this.registry[alias[i]].isAlias = true;
 				console.log(alias[i] + ' alias loaded.');
 			}
 			console.log(command.get('name') + ' command loaded.');
