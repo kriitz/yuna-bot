@@ -25,7 +25,7 @@ module.exports = class CommandsCommand extends Command{
     		+ `__**Available Yuna Commands:**__ \n\n`
 
     	for(var cmd in commands){
-    		if (commands[cmd].hasPermission(msg)){
+    		if (commands[cmd].hasPermission(msg) && commands[cmd].isAlias == false){
 	    		info += "**" + cmd + ":**";
 	    		
 	    		var usage = commands[cmd].get('usage');
