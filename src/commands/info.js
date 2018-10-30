@@ -1,19 +1,21 @@
 const Command = require('../command.js');
-var getMemberData = require('../memberData.js');
 
 module.exports = class InfoCommand extends Command{
 	constructor(bot){
 		super(bot, {
 			name: 'info',
-			usage: '<Username> or None',
-			options: [],
+			alias: [
+			],
+			usage: '<Username>',
+			options: [
+			],
 			description: 'Gives complete infomation about you or another user',
 		});
 	}
 
 	//Access
 	hasPermission(msg){
-		return msg.member.hasPermission("CREATE_INSTANT_INVITE");
+		return true;
 	}
 
 	process(msg, suffix){
@@ -22,52 +24,35 @@ module.exports = class InfoCommand extends Command{
 			user = msg.author;
 		}
 
-		const data = getMemberData(user);
-		var stand = "Good";
-		if (data.disabled == true){
-			stand = 'Disabled';
+		const data = this.bot.database;
+		const characters = data.ref('users/' + msg.author.id + '/characters');
+		if (characters == null){
+			return;
 		}
 
-		var ali = "None";
-		if (data.aliases.toString() !== ""){
-			console.log("Passed");
-			ali = data.aliases.toString();
-		}
+		characters.once('value', function(snapshot){
+			var fields = [];
+			snapshot.forEach(function(cSnapshot){
+				let char = cSnapshot.val();
+				fields.push({name: char.name, value: `**Level:** ${char.level} **Gear Score:** ${char.gear}`});
+			})
+				msg.channel.send("", {embed: {
+					color: 3447003,
+					author: {
+						name: user.username
+					},
+					description: "Characters:",
+					fields: fields,
+					thumbnail: {
+						url: user.avatarURL
+					},
+					footer: {
+						text: ''
+					}
+				}})
+		});
 
-		console.log(ali);
-		msg.channel.send("", {embed: {
-			color: 3447003,
-			author: {
-				name: user.username
-			},
-			description: data.intro,
-			fields: [
-			{
-				name: 'Aliases:',
-				value: ali
-			},
-			{
-				name: 'Standing:',
-				value: stand,
-				inline: true
-			},
-			{
-				name: 'Kegs:',
-				value: data.stacks,
-				inline: true
-			},
-			{
-				name: 'Created',
-				value: user.createdAt
-			}
-			],
-			thumbnail: {
-				url: user.avatarURL
-			},
-			footer: {
-				text: data.silvers + ' Silver Serpents'
-			}
-		}});
+		msg.delete();
 		return
 	}
 }
