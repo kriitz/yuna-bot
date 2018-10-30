@@ -6,6 +6,7 @@ const cron = require("cron").CronJob;
 const botId = '504996285900783638';
 
 // [[ Imports ]] const  = require('./src/commands/.js');
+const HelpCommand = require('./src/commands/help.js');
 const MkCharCommand = require('./src/commands/mkchar.js');
 const WarnCommand = require('./src/commands/warn.js');
 
@@ -14,6 +15,7 @@ var mainChannel = null;
 
 bot.once("ready", function () {
 	const guild = bot.guilds.get("393936202123968513");
+	const notifications = guild.channels.find('name', 'notifications');
 	const member = guild.members.get(botId);
 	
 	bot.user.setGame("Witchcraft | /help");
@@ -22,23 +24,26 @@ bot.once("ready", function () {
 	const rawCommands = [
 		MkCharCommand,
 		WarnCommand,
+		HelpCommand
   	];
   
 	bot.initializeCommands(rawCommands);
 	mainChannel.send("Ready to begin!");
 
 	// Cronjobs
-	const dayReset = new cron("00 00 18 * * *",function(){
+	const dayReset = new cron("00 00 17 * * *",function(){
 		const sayings = ["It's a new day, it's a new smile!"];
-		member.setNickname("Daily Reset - 12:00 UTC");
-		mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone");
+		member.setNickname("Daily Reset - 12:00 UTC").then(
+			mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone");
+		);
 		member.setNickname("Yuna");
 	}, null, true, "America/Los_Angeles");
 
 	const weekReset = new cron('00 00 17 * * 5', function(){
 		const sayings = ["One week after the next, the grind continues"];
-		member.setNickname("Week Reset - Friday 12:00 UTC");
-		mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone");
+		member.setNickname("Week Reset - Friday 12:00 UTC").then(
+			mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone");
+		);
 		member.setNickname("Yuna");
 	}, null, true, "America/Los_Angeles");
 });
@@ -48,9 +53,11 @@ const blockedWords = ["loli"];
 bot.on("message", function (msg) {
 	if (msg.author == bot.user)
 		return
+	
+	if (msg.channel == )
 
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
-		var cmdTxt = msg.content.split(" ")[0].substring(1);
+	var cmdTxt = msg.content.split(" ")[0].substring(1);
         var suffix = msg.content.substring(cmdTxt.length + 2);
 		var cmd = bot.commands()[cmdTxt];
 
