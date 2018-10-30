@@ -25,7 +25,7 @@ module.exports = class InfoCommand extends Command{
 		}
 
 		const data = this.bot.database;
-		const characters = data.ref('users/' + msg.author.id + '/characters');
+		const characters = data.ref('users/' + user.id + '/characters');
 		if (characters == null){
 			return;
 		}
