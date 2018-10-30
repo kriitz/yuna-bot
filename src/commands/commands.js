@@ -4,10 +4,13 @@ module.exports = class CommandsCommand extends Command{
 	constructor(bot){
 		super(bot, {
 			name: 'commands',
+			alias: [
+				'cmds'
+			],
 			usage: '',
 			options: [
 			],
-			description: 'Displays all commands avialable to you',
+			description: 'Displays all commands available to you',
 		});
 	}
 
