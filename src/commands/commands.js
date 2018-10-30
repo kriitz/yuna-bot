@@ -34,7 +34,7 @@ module.exports = class CommandsCommand extends Command{
 	    		if(usage !== "")
 	    			info += " " + usage + "\n";
 	    		
-	    		info += "\t\t" + commands[cmd].description + "\n";
+	    		info += "\t\t" + commands[cmd].description + "\n\n";
     		}
     	}
     	msg.author.send(info);
