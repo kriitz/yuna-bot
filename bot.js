@@ -34,7 +34,7 @@ bot.once("ready", function () {
 	const dayReset = new cron("00 00 17 * * *",function(){
 		const sayings = ["It's a new day, it's a new smile!"];
 		member.setNickname("Daily Reset - 12:00 UTC").then(
-			mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone");
+			mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone")
 		);
 		member.setNickname("Yuna");
 	}, null, true, "America/Los_Angeles");
@@ -42,7 +42,7 @@ bot.once("ready", function () {
 	const weekReset = new cron('00 00 17 * * 5', function(){
 		const sayings = ["One week after the next, the grind continues"];
 		member.setNickname("Week Reset - Friday 12:00 UTC").then(
-			mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone");
+			mainChannel.send(sayings[Math.floor(Math.random()*sayings.length)] +" @everyone")
 		);
 		member.setNickname("Yuna");
 	}, null, true, "America/Los_Angeles");
