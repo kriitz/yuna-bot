@@ -4,6 +4,9 @@ module.exports = class HelpCommand extends Command{
 	constructor(bot){
 		super(bot, {
 			name: 'help',
+			alias: [
+			"h"
+			],
 			usage: '',
 			options: [
 				{name: 'c', value: 'Reply with info on how to use commands'}
