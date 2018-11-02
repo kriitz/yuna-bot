@@ -1,0 +1,28 @@
+const Command = require('../command.js');
+const Events = {
+	["Double loot on Normal/Hard Dungeons","<http://maplestory2.nexon.net/en/news/article/37854/dungeon-delight-event-week-2>"]
+};
+
+module.exports = class EventsCommand extends Command{
+	constructor(bot){
+		super(bot, {
+			name: 'events',
+			alias: [
+				'event'
+			],
+			usage: '',
+			options: [
+			],
+			description: 'Gives all the current events currently online',
+		});
+	}
+
+	//Access
+	hasPermission(msg){
+		return msg.member.hasPermission("CREATE_INSTANT_INVITE");
+	}
+
+	process(msg, suffix){
+		return
+	}
+}
