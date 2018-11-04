@@ -11,6 +11,7 @@ const MkCharCommand = require('./src/commands/mkchar.js');
 const WarnCommand = require('./src/commands/warn.js');
 const InfoCommand = require('./src/commands/info.js');
 const CommandsCommand = require('./src/commands/commands.js');
+const EventsCommand = require('./src/commands/events.js');
 
 const bot = new Yuna();
 var mainChannel = null;
@@ -28,7 +29,8 @@ bot.once("ready", function () {
 		WarnCommand,
 		HelpCommand,
 		InfoCommand,
-		CommandsCommand
+		CommandsCommand,
+		EventsCommand
   	];
   
 	bot.initializeCommands(rawCommands);
