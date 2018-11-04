@@ -27,7 +27,8 @@ module.exports = class EventsCommand extends Command{
 		for (let index in events){
 			msg.channel.send("", {embed:{
 				color: 3447003,
-				title: "[" + events[index][1] + "](" + events[index][2] + ")",
+				title: events[index][0],
+				url: events[index][1],
 			}});
 		}
 		
