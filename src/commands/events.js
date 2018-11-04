@@ -1,6 +1,6 @@
 const Command = require('../command.js');
 const events = [
-	['Double loot on Normal/Hard Dungeons','http://maplestory2.nexon.net/en/news/article/37854/dungeon-delight-event-week-2']
+	['Double loot on Normal/Hard Dungeons','http://maplestory2.nexon.net/en/news/article/37854/dungeon-delight-event-week-2', 'December 17, 1995 03:24:00']
 ];
 
 module.exports = class EventsCommand extends Command{
@@ -28,6 +28,7 @@ module.exports = class EventsCommand extends Command{
 			msg.channel.send("", {embed:{
 				color: 3447003,
 				title: events[index][0],
+				description: "- " + (new Date(events[index][2]) - new Date()) + " left",
 				url: events[index][1],
 			}});
 		}
