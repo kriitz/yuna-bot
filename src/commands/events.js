@@ -1,7 +1,7 @@
 const Command = require('../command.js');
-const events = {
-	["Double loot on Normal/Hard Dungeons","<http://maplestory2.nexon.net/en/news/article/37854/dungeon-delight-event-week-2>"]
-};
+const events = [
+	['Double loot on Normal/Hard Dungeons','http://maplestory2.nexon.net/en/news/article/37854/dungeon-delight-event-week-2']
+];
 
 module.exports = class EventsCommand extends Command{
 	constructor(bot){
