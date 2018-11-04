@@ -24,7 +24,7 @@ module.exports = class EventsCommand extends Command{
 
 	process(msg, suffix){
 		
-		for (index in events){
+		for (let index in events){
 			msg.channel.send("", {embed:{
 				color: 3447003,
 				description: events[index][1],
