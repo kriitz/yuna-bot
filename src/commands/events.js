@@ -1,5 +1,5 @@
 const Command = require('../command.js');
-const Events = {
+const events = {
 	["Double loot on Normal/Hard Dungeons","<http://maplestory2.nexon.net/en/news/article/37854/dungeon-delight-event-week-2>"]
 };
 
@@ -23,6 +23,15 @@ module.exports = class EventsCommand extends Command{
 	}
 
 	process(msg, suffix){
+		
+		for (index in events){
+			msg.channel.send("", {embed:{
+				color: 3447003,
+				description: events[index][1],
+				url: events[index][2]
+			}});
+		}
+		
 		return
 	}
 }
