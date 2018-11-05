@@ -26,8 +26,8 @@ module.exports = class EventsCommand extends Command{
 		
 		for (let index in events){
 			const timeLeft = Math.abs(new Date(events[index][2]).getTime() - new Date().getTime());
-			const minutesLeft = timeleft / 60000;
-			const hoursLeft = timeleft / 3600000;
+			const minutesLeft = timeLeft / 60000;
+			const hoursLeft = timeLeft / 3600000;
 			msg.channel.send("", {embed:{
 				color: 3447003,
 				title: events[index][0],
