@@ -31,7 +31,7 @@ module.exports = class EventsCommand extends Command{
 			msg.channel.send("", {embed:{
 				color: 3447003,
 				title: events[index][0],
-				description: `${0d ${hoursLeft}h ${minutesLeft}m left`,
+				description: `0d ${hoursLeft}h ${minutesLeft}m left`,
 				url: events[index][1],
 			}});
 		}
