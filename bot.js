@@ -109,4 +109,5 @@ process.on('uncaughtException', function(err) {
 	}
 });
 
+process.env.TZ = "America/Los_Angeles";
 bot.login(process.env.BOT_TOKEN);
