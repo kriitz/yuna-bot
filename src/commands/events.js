@@ -1,6 +1,8 @@
 const Command = require('../command.js');
 const events = [
-	['Double loot on Normal/Hard Dungeons','http://maplestory2.nexon.net/en/news/article/37854/dungeon-delight-event-week-2', 'November 8, 2018 16:00:00']
+	['Double loot on Normal/Hard Dungeons','http://maplestory2.nexon.net/en/news/article/37854/dungeon-delight-event-week-2', 'November 8, 2018 16:00:00'],
+	['Chaos Dungeons Release', 'http://maplestory2.nexon.net/en/news/article/37793/update-nov-5-coming-soon-chaos-rising-update', 'November 7, 2018 16:00:00']
+	
 ];
 
 module.exports = class EventsCommand extends Command{
