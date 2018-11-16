@@ -7,7 +7,7 @@ const botId = '504996285900783638';
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const HelpCommand = require('./src/commands/help.js');
-const MkCharCommand = require('./src/commands/mkchar.js');
+const LinkCommand = require('./src/commands/link.js');
 const WarnCommand = require('./src/commands/warn.js');
 const InfoCommand = require('./src/commands/info.js');
 const CommandsCommand = require('./src/commands/commands.js');
@@ -25,7 +25,7 @@ bot.once("ready", function () {
 	mainChannel = guild.channels.find("name","bot");
 	
 	const rawCommands = [
-		MkCharCommand,
+		LinkCommand,
 		WarnCommand,
 		HelpCommand,
 		InfoCommand,
@@ -37,6 +37,7 @@ bot.once("ready", function () {
 	mainChannel.send("Ready to begin!");
 
 	// Cronjobs
+	/*
 	const dayReset = new cron("00 00 17 * * *",function(){
 		const sayings = ["It's a new day, it's a new smile!"];
 		member.setNickname("Daily Reset - 12:00 UTC").then(
@@ -52,6 +53,7 @@ bot.once("ready", function () {
 		);
 		member.setNickname("Yuna");
 	}, null, true, "America/Los_Angeles");
+	*/
 });
 
 const blockedWords = ["loli"];
