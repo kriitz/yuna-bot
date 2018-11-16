@@ -1,4 +1,5 @@
 const Command = require('../command.js');
+const request = require('request');
 
 module.exports = class WarnCommand extends Command{
 	constructor(bot){
