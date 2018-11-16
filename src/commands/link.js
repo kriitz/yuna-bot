@@ -30,7 +30,9 @@ module.exports = class LinkCommand extends Command{
 		if (name == undefined || name == "guest"){
 			member.addRole(msg.guild.roles.find('name', 'Guest'));
 		}else{
-			request();
+			request(`https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${name}?api_key=RGAPI-dbf91e5f-93af-4e30-8090-79cffc854cbc`, { json: true }, (err, res, body)=>{
+				console.log(body);
+			});
 			
 			this.bot.database.ref("users/" + member.id + "/accounts").push({
 				name: name,
