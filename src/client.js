@@ -4,7 +4,7 @@ const fs = require("fs");
 const firebase = require("firebase");
 
   const config = {
-    apiKey: "AIzaSyB9BdapqbWYLtpk4Ci6134kLbj4L_DFWYk",
+    apiKey: process.env.FIREBASE_TOKEN,
     authDomain: "yuna-maplestory2.firebaseapp.com",
     databaseURL: "https://yuna-maplestory2.firebaseio.com",
     projectId: "yuna-maplestory2",
