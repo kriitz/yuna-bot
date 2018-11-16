@@ -1,2 +1,2 @@
-# yuna_maplestory2
+# yuna-bot
 Guilty was here.
