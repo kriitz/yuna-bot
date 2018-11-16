@@ -5,11 +5,11 @@ const firebase = require("firebase");
 
   const config = {
     apiKey: process.env.FIREBASE_TOKEN,
-    authDomain: "yuna-maplestory2.firebaseapp.com",
-    databaseURL: "https://yuna-maplestory2.firebaseio.com",
-    projectId: "yuna-maplestory2",
-    storageBucket: "yuna-maplestory2.appspot.com",
-    messagingSenderId: "810852213426"
+    authDomain: "yuna-bot7.firebaseapp.com",
+    databaseURL: "https://yuna-bot7.firebaseio.com",
+    projectId: "yuna-bot7",
+    storageBucket: "yuna-bot7.appspot.com",
+    messagingSenderId: "930341747568"
   };
 
 firebase.initializeApp(config);
