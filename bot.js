@@ -12,6 +12,7 @@ const WarnCommand = require('./src/commands/warn.js');
 const InfoCommand = require('./src/commands/info.js');
 const CommandsCommand = require('./src/commands/commands.js');
 const EventsCommand = require('./src/commands/events.js');
+const happyBirthDayCommand = require('./src/commands/happyBirthDay.js');
 
 const bot = new Yuna();
 var mainChannel = null;
@@ -30,7 +31,8 @@ bot.once("ready", function () {
 		HelpCommand,
 		InfoCommand,
 		CommandsCommand,
-		EventsCommand
+		EventsCommand,
+		happyBirthDayCommand
   	];
   
 	bot.initializeCommands(rawCommands);
