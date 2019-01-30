@@ -17,15 +17,15 @@ module.exports = class VersionCommand extends Command{
 
 	//Access
 	hasPermission(msg){
-		return msg.guild.owner === msg.member;
+		return true;
 	}
 
 	process(msg, suffix){
-		let replyContent = `Current build: ${env.HEROKU_RELEASE_VERSION}`;
+		let replyContent = `Current build: ${process.env.HEROKU_RELEASE_VERSION}`;
 		const opt = suffix.split(" ")[0];
 
 		if(opt && opt.startsWith("-d")){
-			replyContent += `\n\t${env.HEROKU_RELEASE_CREATED_AT} ${env.HEROKU_APP_NAME}`; 
+			replyContent += `\n\t${process.env.HEROKU_RELEASE_CREATED_AT} ${process.env.HEROKU_APP_NAME}`; 
 		}
 
 		return replyContent;
