@@ -21,10 +21,10 @@ module.exports = class HappyBirthDayCommand extends Command{
 
 	//Access
 	hasPermission(msg){
-		return msg.guild.owner === msg.member;
+		return true;
 	}
 
 	process(msg, suffix){
-		return 'Ping!'
+		return 'Happy Birthday!'
 	}
 }
