@@ -7,7 +7,7 @@ const request = require('request');
 module.exports = class HappyBirthDayCommand extends Command{
 	constructor(bot){
 		super(bot, {
-			name: 'birthdayWish',
+			name: 'wish',
 			alias: [
 				'ping'
 			],
@@ -21,7 +21,7 @@ module.exports = class HappyBirthDayCommand extends Command{
 
 	//Access
 	hasPermission(msg){
-		return true;
+		return msg.guild.owner === msg.member;
 	}
 
 	process(msg, suffix){
