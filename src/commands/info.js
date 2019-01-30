@@ -36,20 +36,20 @@ module.exports = class InfoCommand extends Command{
 				let char = cSnapshot.val();
 				fields.push({name: char.name, value: `**Level:** ${char.level} **Gear Score:** ${char.gear}`});
 			})
-				msg.channel.send("", {embed: {
-					color: 3447003,
-					author: {
-						name: user.username
-					},
-					description: "Characters:",
-					fields: fields,
-					thumbnail: {
-						url: user.avatarURL
-					},
-					footer: {
-						text: ''
-					}
-				}})
+			msg.channel.send("", {embed: {
+				color: 3447003,
+				author: {
+					name: user.username
+				},
+				description: "Characters:",
+				fields: fields,
+				thumbnail: {
+					url: user.avatarURL
+				},
+				footer: {
+					text: ''
+				}
+			}})
 		});
 
 		msg.delete();

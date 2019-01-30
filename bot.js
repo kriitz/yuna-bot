@@ -12,6 +12,8 @@ const WarnCommand = require('./src/commands/warn.js');
 const InfoCommand = require('./src/commands/info.js');
 const CommandsCommand = require('./src/commands/commands.js');
 const EventsCommand = require('./src/commands/events.js');
+const VersionCommand = require('./src/commands/version.js');
+const HowCommand = require('./src/commands/how.js');
 
 const bot = new Yuna();
 var mainChannel = null;
@@ -30,7 +32,9 @@ bot.once("ready", function () {
 		HelpCommand,
 		InfoCommand,
 		CommandsCommand,
-		EventsCommand
+		EventsCommand,
+		VersionCommand,
+		HowCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
@@ -61,12 +65,6 @@ const blockedWords = ["loli"];
 bot.on("message", function (msg) {
 	if (msg.author == bot.user)
 		return
-	if (msg.channel.name == "initialize"){
-		if (msg.author.id !== "89488149201326080" && msg.content.startsWith("/char") == false){
-			msg.delete();
-			return
-		}
-	}
 	
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
 	var cmdTxt = msg.content.split(" ")[0].substring(1);
