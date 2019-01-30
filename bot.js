@@ -7,13 +7,13 @@ const botId = '504996285900783638';
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const HelpCommand = require('./src/commands/help.js');
-const LinkCommand = require('./src/commands/link.js');
 const WarnCommand = require('./src/commands/warn.js');
 const InfoCommand = require('./src/commands/info.js');
 const CommandsCommand = require('./src/commands/commands.js');
 const EventsCommand = require('./src/commands/events.js');
 const VersionCommand = require('./src/commands/version.js');
 const HowCommand = require('./src/commands/how.js');
+const happyBirthDayCommand = require('./src/commands/happyBirthDay.js');
 
 const bot = new Yuna();
 var mainChannel = null;
@@ -27,7 +27,6 @@ bot.once("ready", function () {
 	mainChannel = guild.channels.find("name","bot");
 	
 	const rawCommands = [
-		LinkCommand,
 		WarnCommand,
 		HelpCommand,
 		InfoCommand,
@@ -35,6 +34,7 @@ bot.once("ready", function () {
 		EventsCommand,
 		VersionCommand,
 		HowCommand,
+		happyBirthDayCommand
   	];
   
 	bot.initializeCommands(rawCommands);

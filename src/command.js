@@ -3,7 +3,6 @@ module.exports = class Command{
 		this.name = info.name;
 		this.description = info.description;
 		this.usage = info.usage;
-		this.role = info.role;
 		this.options = info.options;
 		this.alias = info.alias;
 

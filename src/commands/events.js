@@ -25,20 +25,27 @@ module.exports = class EventsCommand extends Command{
 	}
 
 	process(msg, suffix){
-		
-		for (let index in events){
-			const timeLeft = Math.abs(new Date(events[index][2]).getTime() - new Date().getTime());
-			const daysLeft = timeLeft / (3600000 * 24);
-			const hoursLeft = (timeLeft - Math.floor(daysLeft) * (3600000 * 24)) / 3600000;
-			const minutesLeft = (timeLeft - ((Math.floor(daysLeft) * (3600000 * 24)) + (Math.floor(hoursLeft) * 3600000))) / 60000;
-			msg.channel.send("", {embed:{
-				color: 3447003,
-				title: events[index][0],
-				description: `${Math.floor(daysLeft)}d ${Math.floor(hoursLeft)}h ${Math.floor(minutesLeft)}m left`,
-				url: events[index][1],
-			}});
-		}
-		
+		const data = this.bot.database.ref('bot/events');
+
+		data.once('value', function(snapshot){
+			snapshot.forEach(function(cSnapshot){
+				let event = cSnapshot.val();
+
+				const timeLeft = new Date(event.time).getTime() - new Date().getTime();
+				if(timeLeft > 0){
+					const daysLeft = timeLeft / (3600000 * 24);
+					const hoursLeft = (timeLeft - Math.floor(daysLeft) * (3600000 * 24)) / 3600000;
+					const minutesLeft = (timeLeft - ((Math.floor(daysLeft) * (3600000 * 24)) + (Math.floor(hoursLeft) * 3600000))) / 60000;
+					msg.channel.send("", {embed:{
+						color: 3447003,
+						title: event.name,
+						description: `${Math.floor(daysLeft)}d ${Math.floor(hoursLeft)}h ${Math.floor(minutesLeft)}m left`,
+						url: event.link,
+					}});
+				}
+			});
+		});
+
 		return
 	}
 }

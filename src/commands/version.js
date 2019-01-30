@@ -22,7 +22,6 @@ module.exports = class VersionCommand extends Command{
 
 	process(msg, suffix){
 		let replyContent = `Current build: ${env.HEROKU_RELEASE_VERSION}`;
-
 		const opt = suffix.split(" ")[0];
 
 		if(opt && opt.startsWith("-d")){
