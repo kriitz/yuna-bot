@@ -7,7 +7,7 @@ const request = require('request');
 module.exports = class HappyBirthDayCommand extends Command{
 	constructor(bot){
 		super(bot, {
-			name: 'wish',
+			name: 'birthdayWish',
 			alias: [
 				'ping'
 			],
