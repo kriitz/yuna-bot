@@ -7,7 +7,7 @@ module.exports = class AddEventCommand extends Command{
 			alias: [
 				'addevt',
 			],
-			usage: '<Name> <Link> <Time Object>',
+			usage: '<Name> > <Link> > <Time Object>',
 			options: [
 			],
 			description: 'Registers a new event to the event list',
@@ -23,8 +23,8 @@ module.exports = class AddEventCommand extends Command{
 		let replyContent = "Event added: ";
 		const data = this.bot.database;
 
-		const name = suffix.split(" ")[0];
-		const link = suffix.split(" ")[1];
+		const name = suffix.split(">")[0];
+		const link = suffix.split(">")[1];
 		const timeObject = suffix.slice(name.length + link.length + 2);
 		
 		this.bot.database.ref("bot/events").push({
