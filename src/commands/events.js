@@ -25,7 +25,7 @@ module.exports = class EventsCommand extends Command{
 	}
 
 	process(msg, suffix){
-		const data = this.bot.database.ref('bot/events');
+		const data = this.bot.database.ref('events');
 
 		data.once('value', function(snapshot){
 			snapshot.forEach(function(cSnapshot){
