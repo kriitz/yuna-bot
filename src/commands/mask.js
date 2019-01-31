@@ -7,7 +7,7 @@ module.exports = class MaskCommand extends Command{
 			usage: '<Name> or <NULL>',
 			options: [
 			],
-			description: "Gives everyone in the server a new face. If suffix is empty then set everyone's nickname to nothing.",
+			description: "Gives everyone in the server a new face. If suffix is empty then set everyone's nickname to nothing",
 		});
 	}
 

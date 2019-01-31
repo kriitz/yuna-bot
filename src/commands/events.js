@@ -25,8 +25,8 @@ module.exports = class EventsCommand extends Command{
 		data.once('value', function(snapshot){
 			snapshot.forEach(function(cSnapshot){
 				let event = cSnapshot.val();
-
 				const timeLeft = new Date(event.time).getTime() - new Date().getTime();
+				
 				if(timeLeft > 0){
 					const daysLeft = timeLeft / (3600000 * 24);
 					const hoursLeft = (timeLeft - Math.floor(daysLeft) * (3600000 * 24)) / 3600000;
@@ -41,6 +41,6 @@ module.exports = class EventsCommand extends Command{
 			});
 		});
 
-		return
+		return;
 	}
 }
