@@ -27,7 +27,7 @@ module.exports = class AddEventCommand extends Command{
 		const link = suffix.split(" ")[1];
 		const timeObject = suffix.slice(name.length + link.length + 2);
 		
-		this.bot.database.ref("events").push({
+		this.bot.database.ref("bot/events").push({
 			name: name,
 			link: link,
 			time: timeObject,
