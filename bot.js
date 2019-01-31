@@ -14,6 +14,7 @@ const EventsCommand = require('./src/commands/events.js');
 const VersionCommand = require('./src/commands/version.js');
 const HowCommand = require('./src/commands/how.js');
 const happyBirthDayCommand = require('./src/commands/happyBirthDay.js');
+const AddEventCommand = require('./src/commands/addevent.js');
 
 const bot = new Yuna();
 var mainChannel = null;
@@ -34,7 +35,8 @@ bot.once("ready", function () {
 		EventsCommand,
 		VersionCommand,
 		HowCommand,
-		happyBirthDayCommand
+		happyBirthDayCommand,
+		AddEventCommand
   	];
   
 	bot.initializeCommands(rawCommands);
