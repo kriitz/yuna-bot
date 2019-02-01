@@ -37,7 +37,7 @@ module.exports = class VersionCommand extends Command{
 					json: true
 				};
 
-				request(option, (err, res, body)=>{
+				request(options, (err, res, body)=>{
 					if (err){
 						return msg.reply("Error: " + err);
 					}
