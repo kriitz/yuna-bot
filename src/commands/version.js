@@ -43,6 +43,7 @@ module.exports = class VersionCommand extends Command{
 					if (err){
 						msg.reply("Error: " + err);
 					}
+					msg.reply("Request");
 					replyContent += body.object.url;
 					/*
 					request(body.object.url, { json: true }, (err, res, body)=>{
