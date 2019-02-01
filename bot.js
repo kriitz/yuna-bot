@@ -78,7 +78,7 @@ bot.on("message", function (msg) {
 				try{
 					const replyContent = cmd.process(msg, suffix);
 					if (replyContent) msg.reply(replyContent);
-				} catch(error){
+				}catch(error){
 					mainChannel.send("Command " + cmdTxt + " failed. \n" + error.stack);
 				}
 				console.log(cmdTxt + " command excuted.");						

@@ -32,11 +32,11 @@ module.exports = class VersionCommand extends Command{
 				replyContent += `\n\t${process.env.HEROKU_RELEASE_CREATED_AT} ${process.env.HEROKU_APP_NAME}`; 
 		
 			if(opt == "-u" || opt2 == "-u"){
-				request(`https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master`, function (err, res, body){
+				request(`https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master`,{ json: true }, (err, res, body)=>{
 					if (err){
 						return msg.reply("Error: " + err);
 					}
-					msg.reply(body.object.url);
+					replyContent += body.object.url;
 					request(body.object.url, { json: true }, (err, res, body)=>{
 						msg.reply(body.message);
 					});
