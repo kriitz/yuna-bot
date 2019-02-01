@@ -1,16 +1,17 @@
 const Command = require('../command.js');
 
-module.exports = class AddEventCommand extends Command{
+module.exports = class RemoveEventCommand extends Command{
 	constructor(bot){
 		super(bot, {
-			name: 'addevent',
+			name: 'removeevent',
 			alias: [
-				'addevt',
+				'rmevt',
+				'rmevent',
 			],
-			usage: '<Name> > <Link> <Time Object>',
+			usage: '<Event Name>',
 			options: [
 			],
-			description: 'Registers a new event to the event list',
+			description: 'Removes a registered event',
 		});
 	}
 
@@ -21,19 +22,17 @@ module.exports = class AddEventCommand extends Command{
 
 	process(msg, suffix){
 		let replyContent = "Event added: ";
-		const data = this.bot.database;
+		const path = `bot/${msg.guild.id}/events`;
+		const data = this.bot.database.ref(path);
 
-		const name = suffix.split(">")[0];
-		const link = suffix.slice(name.length + 1).split(" ")[0];
-		const timeObject = suffix.slice(name.length + link.length + 2);
-		
-		this.bot.database.ref("bot/events").push({
-			name: name,
-			link: link,
-			time: timeObject,
+		data.once('value', function(snapshot){
+			snapshot.forEach(function(cSnapshot){
+				let key = cSnapshot.key;
+				if(cSnapshot.val().name.indexOf(key)){
+					this.bot.database.ref(`${path}/${key}`).remove();
+				}
+			});
 		});
-
-		msg.delete();
 
 		return `${replyContent} ${name}`;
 	}

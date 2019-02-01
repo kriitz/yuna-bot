@@ -27,11 +27,13 @@ module.exports = class AddEventCommand extends Command{
 		const link = suffix.slice(name.length + 1).split(" ")[0];
 		const timeObject = suffix.slice(name.length + link.length + 2);
 		
-		this.bot.database.ref("bot/events").push({
+		this.bot.database.ref(`bot/${msg.guild.id}/events`).push({
 			name: name,
 			link: link,
 			time: timeObject,
 		});
+
+		msg.delete();
 
 		return `${replyContent} ${name}`;
 	}

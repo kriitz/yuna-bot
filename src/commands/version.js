@@ -1,4 +1,5 @@
 const Command = require('../command.js');
+const request = require('request');
 
 module.exports = class VersionCommand extends Command{
 	constructor(bot){
@@ -9,7 +10,8 @@ module.exports = class VersionCommand extends Command{
 			],
 			usage: '',
 			options: [
-				{name: 'd', value: 'Display the date in which the build was release'}
+				{name: 'd', value: 'Display the date in which the build was release'},
+				{name: 'u', value: 'Get the latest commit notes'}
 			],
 			description: 'Display the current build and version of yuna',
 		});
@@ -23,9 +25,22 @@ module.exports = class VersionCommand extends Command{
 	process(msg, suffix){
 		let replyContent = `Current build: ${process.env.HEROKU_RELEASE_VERSION}`;
 		const opt = suffix.split(" ")[0];
+		const opt2 = suffix.split(" ")[1];
 
-		if(opt && opt.startsWith("-d")){
-			replyContent += `\n\t${process.env.HEROKU_RELEASE_CREATED_AT} ${process.env.HEROKU_APP_NAME}`; 
+		if(opt){
+			if(opt == "-d" || opt2 == "-d")
+				replyContent += `\n\t${process.env.HEROKU_RELEASE_CREATED_AT} ${process.env.HEROKU_APP_NAME}`; 
+		
+			if(opt == "-u" || opt2 == "-u"){
+				request(`https://api.github.com/repos/imkritz/yuna-bot/git/refs/heads/master`, { json: true }, (err, res, body)=>{
+					if (err){
+						return msg.reply("Error: " + err);
+					}
+					request(body.object.url, { json: true }, (err, res, body)=>{
+						msg.reply(body.message);
+					});
+				});
+			}
 		}
 
 		return replyContent;
