@@ -34,10 +34,11 @@ module.exports = class VersionCommand extends Command{
 			if(opt == "-u" || opt2 == "-u"){
 				let options = {
 					url: 'https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master',
+					method: 'GET',
 					json: true
 				};
 
-				request(options, (err, res, body)=>{
+				request(options, function (err, res, body){
 					if (err){
 						msg.reply("Error: " + err);
 					}
