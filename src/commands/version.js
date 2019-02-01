@@ -42,9 +42,11 @@ module.exports = class VersionCommand extends Command{
 						msg.reply("Error: " + err);
 					}
 					replyContent += body.object.url;
+					/*
 					request(body.object.url, { json: true }, (err, res, body)=>{
 						msg.reply(body.message);
 					});
+					*/
 				});
 			}
 		}
