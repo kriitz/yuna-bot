@@ -34,14 +34,15 @@ module.exports = class VersionCommand extends Command{
 			if(opt == "-u" || opt2 == "-u"){
 				msg.reply("-u");
 				let options = {
-					uri: 'https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master',
-					method: 'GET',
+					url: 'https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master',
 					json: true
 				};
 
-				request(options, function (err, res, body){
+				var x = await request.get(options, function (err, res, body){
 					if (err){
 						msg.reply("Error: " + err);
+					}else if(res){
+
 					}
 					msg.reply("Request");
 					replyContent += body.object.url;
