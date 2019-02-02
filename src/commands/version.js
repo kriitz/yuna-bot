@@ -34,7 +34,7 @@ module.exports = class VersionCommand extends Command{
 			if(opt == "-u" || opt2 == "-u"){
 				msg.reply("-u");
 				let options = {
-					url: 'https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master',
+					uri: 'https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master',
 					method: 'GET',
 					json: true
 				};
@@ -53,7 +53,6 @@ module.exports = class VersionCommand extends Command{
 					return replyContent;
 				});
 			}
-		}
-		
+		}	
 	}
 }
