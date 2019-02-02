@@ -35,12 +35,17 @@ module.exports = class VersionCommand extends Command{
 				msg.reply("-u");
 				let options = {
 					url: 'https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master',
+					headers:{
+						'User-Agent': 'request'
+					},
 					json: true
 				};
 
 				request.get(options, function (err, res, body){
 					if (err){
 						msg.reply("Error: " + err);
+					}else if(res.res.statusCode != 200){
+						msg.reply(res.headers['content-type']);
 					}
 					msg.reply(res.statusCode);
 					msg.reply("Request");
