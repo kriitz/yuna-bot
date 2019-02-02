@@ -38,22 +38,22 @@ module.exports = class VersionCommand extends Command{
 					json: true
 				};
 
-				var x = await request.get(options, function (err, res, body){
+				request.get(options, function (err, res, body){
 					if (err){
 						msg.reply("Error: " + err);
-					}else if(res){
-
 					}
+					msg.reply(res.statusCode);
 					msg.reply("Request");
-					replyContent += body.object.url;
+					//replyContent += body.object.url;
 					/*
 					request(body.object.url, { json: true }, (err, res, body)=>{
 						msg.reply(body.message);
 					});
 					*/
-					return replyContent;
 				});
 			}
-		}	
+		}
+
+		return replyContent;
 	}
 }
