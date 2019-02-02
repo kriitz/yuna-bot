@@ -32,7 +32,6 @@ module.exports = class VersionCommand extends Command{
 				replyContent += `\n\t${process.env.HEROKU_RELEASE_CREATED_AT} ${process.env.HEROKU_APP_NAME}`; 
 		
 			if(opt == "-u" || opt2 == "-u"){
-				msg.reply("-u");
 				let options = {
 					url: 'https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master',
 					headers:{
@@ -45,9 +44,8 @@ module.exports = class VersionCommand extends Command{
 					if (err){
 						msg.reply("Error: " + err);
 					}else if(res.statusCode != 200){
-						msg.reply(res.statusCode);
+						msg.reply(`Response Code: ${res.statusCode)}`;
 					}
-					msg.reply(body.object.url);
 					
 					let options = {
 						url: body.object.url,
@@ -58,7 +56,18 @@ module.exports = class VersionCommand extends Command{
 					};
 
 					request.get(options, function(err, res, body){
-						msg.reply(body.message);
+						msg.channel.send("", {embed:{
+							color: 3447003,
+							author:{
+								name: `Committer: ${body.committer.name}`,
+							},
+							title: "Last Update sent to GitHub",
+							description: body.message,
+							url: body.html_url,
+							footer:{
+								text: `Original Author: ${body.author.name}`,
+							}
+						}});
 					});
 				});
 			}
