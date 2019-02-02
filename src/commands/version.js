@@ -44,7 +44,7 @@ module.exports = class VersionCommand extends Command{
 					if (err){
 						msg.reply("Error: " + err);
 					}else if(res.statusCode != 200){
-						msg.reply(`Response Code: ${res.statusCode)}`;
+						msg.reply(`Response Code: ${res.statusCode}`);
 					}
 					
 					let options = {
@@ -58,13 +58,13 @@ module.exports = class VersionCommand extends Command{
 					request.get(options, function(err, res, body){
 						msg.channel.send("", {embed:{
 							color: 3447003,
-							author:{
+							author: {
 								name: `Committer: ${body.committer.name}`,
 							},
 							title: "Last Update sent to GitHub",
 							description: body.message,
 							url: body.html_url,
-							footer:{
+							footer: {
 								text: `Original Author: ${body.author.name}`,
 							}
 						}});
