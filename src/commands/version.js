@@ -44,7 +44,7 @@ module.exports = class VersionCommand extends Command{
 				request.get(options, function(err, res, body){
 					if (err){
 						msg.reply("Error: " + err);
-					}else if(res.res.statusCode != 200){
+					}else if(res.statusCode != 200){
 						msg.reply(res.statusCode);
 					}
 					msg.reply(body.object.url);
