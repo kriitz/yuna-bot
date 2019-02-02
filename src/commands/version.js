@@ -50,10 +50,10 @@ module.exports = class VersionCommand extends Command{
 						msg.reply(body.message);
 					});
 					*/
-					
+					return replyContent;
 				});
 			}
 		}
-		return replyContent;
+		
 	}
 }
