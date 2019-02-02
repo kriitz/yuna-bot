@@ -44,17 +44,22 @@ module.exports = class VersionCommand extends Command{
 				request.get(options, function (err, res, body){
 					if (err){
 						msg.reply("Error: " + err);
-					}else if(res.statusCode != 200){
-						
+					}else if(res.res.statusCode != 200){
+						msg.reply(res.statusCode);
 					}
-					msg.reply(res.statusCode);
-					msg.reply("Request");
-					//replyContent += body.object.url;
-					/*
-					request(body.object.url, { json: true }, (err, res, body)=>{
+					//msg.reply(body.object.url);
+					
+					let options = {
+						url: body.object.url,
+						headers:{
+							'User-Agent': 'request'
+						},
+						json: true
+					};
+
+					request.get(options, (err, res, body)=>{
 						msg.reply(body.message);
 					});
-					*/
 				});
 			}
 		}
