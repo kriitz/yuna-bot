@@ -45,7 +45,7 @@ module.exports = class VersionCommand extends Command{
 					if (err){
 						msg.reply("Error: " + err);
 					}else if(res.res.statusCode != 200){
-						msg.reply(res.headers['content-type']);
+						
 					}
 					msg.reply(res.statusCode);
 					msg.reply("Request");
