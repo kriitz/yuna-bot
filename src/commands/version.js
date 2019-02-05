@@ -1,5 +1,6 @@
 const Command = require('../command.js');
 const request = require('request');
+var lastUFlag = 0;
 
 module.exports = class VersionCommand extends Command{
 	constructor(bot){
@@ -17,14 +18,24 @@ module.exports = class VersionCommand extends Command{
 		});
 	}
 
-	//Access
+	// Access
 	hasPermission(msg){
 		return true;
 	}
 
+	/**
+	* Fetches latest build from Heroku
+	* -d Fetches more data from Heroku
+	* -u Sends a request to GitHub for a JSON of data from last commit
+	* @param {Object} [msg]
+	* @param {string} [suffix] 
+	* @return {string} 
+	*/
 	process(msg, suffix){
-		let replyContent = `Current build: ${process.env.HEROKU_RELEASE_VERSION}`;
-		const opt = suffix.split(" ")[0];
+		// Github API allows 60 requests per hour*
+
+		let replyContent = `Current build: ${process.env.HEROKU_RELEASE_VERSION}`; // Default print
+		const opt = suffix.split(" ")[0];		// Getting option flags
 		const opt2 = suffix.split(" ")[1];
 
 		if(opt){
@@ -32,23 +43,14 @@ module.exports = class VersionCommand extends Command{
 				replyContent += `\n\t${process.env.HEROKU_RELEASE_CREATED_AT} ${process.env.HEROKU_APP_NAME}`; 
 		
 			if(opt == "-u" || opt2 == "-u"){
-				let options = {
-					url: 'https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master',
-					headers:{
-						'User-Agent': 'request'
-					},
-					json: true
-				};
+				const currentTime = new Date().getTime();
+				const timeLeft = currentTime - lastUFlag;
+				const msInTwoMinutes = 1000*60*2; // 1000 ms = 1 s
+				if(timeLeft > msInTwoMinutes){ 
+					lastUFlag = currentTime;
 
-				request.get(options, function(err, res, body){
-					if (err){
-						msg.reply("Error: " + err);
-					}else if(res.statusCode != 200){
-						msg.reply(`Response Code: ${res.statusCode}`);
-					}
-					
 					let options = {
-						url: body.object.url,
+						url: 'https://api.github.com/repos/ImKritz/yuna-bot/git/refs/heads/master',
 						headers:{
 							'User-Agent': 'request'
 						},
@@ -56,20 +58,38 @@ module.exports = class VersionCommand extends Command{
 					};
 
 					request.get(options, function(err, res, body){
-						msg.channel.send("", {embed:{
-							color: 3447003,
-							author: {
-								name: `Committer: ${body.committer.name}`,
+						if (err){
+							msg.reply("Error: " + err);
+						}else if(res.statusCode != 200){
+							msg.reply(`Response Code: ${res.statusCode}`);
+						}
+						
+						let options = {
+							url: body.object.url,
+							headers:{
+								'User-Agent': 'request'
 							},
-							title: "Last Update sent to GitHub",
-							description: body.message,
-							url: body.html_url,
-							footer: {
-								text: `Original Author: ${body.author.name}`,
-							}
-						}});
+							json: true
+						};
+
+						request.get(options, function(err, res, body){
+							msg.channel.send("", {embed:{
+								color: 3447003,
+								author: {
+									name: `Committer: ${body.committer.name}`,
+								},
+								title: "Last Update sent to GitHub",
+								description: body.message,
+								url: body.html_url,
+								footer: {
+									text: `Original Author: ${body.author.name}`,
+								}
+							}});
+						});
 					});
-				});
+				}else{
+					msg.reply(`Due to GitHub's API policy we can only run -u once every two minutes. Time left: ${((lastUFlag + 1000*60*2) / 1000*60) - (timeLeft / 1000*60)}s`);
+				}
 			}
 		}
 
