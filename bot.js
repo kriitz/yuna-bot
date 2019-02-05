@@ -4,6 +4,7 @@ const cron = require("cron").CronJob;
 
 // const
 const botId = '504996285900783638';
+const guildId = '393936202123968513';
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const HelpCommand = require('./src/commands/help.js');
@@ -15,12 +16,14 @@ const VersionCommand = require('./src/commands/version.js');
 const HowCommand = require('./src/commands/how.js');
 const happyBirthDayCommand = require('./src/commands/happyBirthDay.js');
 const AddEventCommand = require('./src/commands/addevent.js');
+const WipeCommand = require('./src/commands/wipe.js');
+const RemoveEventCommand = require('./src/commands/removeevent.js');
 
 const bot = new Yuna();
 var mainChannel = null;
 
 bot.once("ready", function () {
-	const guild = bot.guilds.get("393936202123968513");
+	const guild = bot.guilds.get(guildId);
 	const notifications = guild.channels.find('name', 'notifications');
 	const member = guild.members.get(botId);
 	
@@ -36,7 +39,8 @@ bot.once("ready", function () {
 		VersionCommand,
 		HowCommand,
 		happyBirthDayCommand,
-		AddEventCommand
+		AddEventCommand,
+		WipeCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
@@ -69,7 +73,7 @@ bot.on("message", function (msg) {
 		return
 	
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
-	var cmdTxt = msg.content.split(" ")[0].substring(1);
+		var cmdTxt = msg.content.split(" ")[0].substring(1);
         var suffix = msg.content.substring(cmdTxt.length + 2);
 		var cmd = bot.commands()[cmdTxt];
 

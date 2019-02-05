@@ -29,11 +29,9 @@ module.exports = class VersionCommand extends Command{
 	* -u Sends a request to GitHub for a JSON of data from last commit
 	* @param {Object} [msg]
 	* @param {string} [suffix] 
-	* @return {string} 
+	* @return {string}
 	*/
 	process(msg, suffix){
-		// Github API allows 60 requests per hour*
-
 		let replyContent = `Current build: ${process.env.HEROKU_RELEASE_VERSION}`; // Default print
 		const opt = suffix.split(" ")[0];		// Getting option flags
 		const opt2 = suffix.split(" ")[1];
@@ -46,7 +44,7 @@ module.exports = class VersionCommand extends Command{
 				const currentTime = new Date().getTime();
 				const timeLeft = currentTime - lastUFlag;
 				const msInTwoMinutes = 1000*60*2; // 1000 ms = 1 s
-				if(timeLeft > msInTwoMinutes){ 
+				if(timeLeft > msInTwoMinutes){ // Github API allows 60 requests per hour*
 					lastUFlag = currentTime;
 
 					let options = {
@@ -88,7 +86,7 @@ module.exports = class VersionCommand extends Command{
 						});
 					});
 				}else{
-					msg.reply(`Due to GitHub's API policy we can only run -u once every two minutes. Time left: ${((lastUFlag + 1000*60*2) / 1000*60) - (timeLeft / 1000*60)}s`);
+					msg.reply(`Due to GitHub's API policy we can only run -u once every two minutes. Time left: ${Math.floor((((lastUFlag + 1000*60*2) - (lastUFlag + timeLeft)) / 1000*60))}s`);
 				}
 			}
 		}

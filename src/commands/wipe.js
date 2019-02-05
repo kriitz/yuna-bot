@@ -16,6 +16,12 @@ module.exports = class WipeCommand extends Command{
 		return msg.guild.owner === msg.member;
 	}
 
+	/**
+	* Deletes multiple messages above at once
+	* @param {Object} [msg]
+	* @param {string} [suffix]
+	* @return {string}
+	*/
 	process(msg, suffix){
 		const numDeletion = parseInt(suffix);
 		if (typeof(numDeletion) !== 'number')

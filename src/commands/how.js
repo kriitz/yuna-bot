@@ -18,6 +18,12 @@ module.exports = class HowCommand extends Command{
 		return true;
 	}
 
+	/**
+	* Replies with the command name and its description
+	* @param {Object} [msg]
+	* @param {string} [suffix]
+	* @return {string}
+	*/
 	process(msg, suffix){
 		var result = "\n\n**/"+suffix+"**";		// Name of command
 		var cmd = this.bot.commands()[suffix];	// Get command by name

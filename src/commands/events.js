@@ -19,6 +19,12 @@ module.exports = class EventsCommand extends Command{
 		return msg.member.hasPermission("CREATE_INSTANT_INVITE");
 	}
 
+	/**
+	* Print all the events in the firebase
+	* @param {Object} [msg]
+	* @param {string} [suffix]
+	* @return {string}
+	*/
 	process(msg, suffix){
 		const data = this.bot.database.ref(`bot/${msg.guild.id}/events`);
 
@@ -40,7 +46,6 @@ module.exports = class EventsCommand extends Command{
 				}
 			});
 		});
-
 		return;
 	}
 }

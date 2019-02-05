@@ -1,19 +1,17 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-
 const firebase = require("firebase");
 
-  const config = {
-    apiKey: process.env.FIREBASE_TOKEN,
-    authDomain: "yuna-bot7.firebaseapp.com",
-    databaseURL: "https://yuna-bot7.firebaseio.com",
-    projectId: "yuna-bot7",
-    storageBucket: "yuna-bot7.appspot.com",
-    messagingSenderId: "930341747568"
-  };
+const config = {
+	apiKey: process.env.FIREBASE_TOKEN,
+	authDomain: "yuna-bot7.firebaseapp.com",
+	databaseURL: "https://yuna-bot7.firebaseio.com",
+	projectId: "yuna-bot7",
+	storageBucket: "yuna-bot7.appspot.com",
+	messagingSenderId: "930341747568"
+};
 
 firebase.initializeApp(config);
-
 
 module.exports = class YunaClient extends Discord.Client {
 	constructor(options = {}){
@@ -24,14 +22,18 @@ module.exports = class YunaClient extends Discord.Client {
 
 		this.on("warn", (m) => console.log("[warn]", m));
 
-		this.on("messageDelete", (msg) => console.log(`[deleted] ${new Date()} ${msg.author.username}: ${msg.content}`));		
+		//this.on("messageDelete", (msg) => console.log(`[deleted] ${new Date()} ${msg.author.username}: ${msg.content}`));		
 	}
 
-	// @parm 
 	commands(){
 		return this.registry;
 	}
 
+	/**
+	* Loads all the commands and their alias in the Client class
+	* @param {array[{string}]} [rawCommands]
+	* @return {null}
+	*/
 	initializeCommands(rawCommands){
 		for (let index in rawCommands){
 			let command = new rawCommands[index](this);
