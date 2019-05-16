@@ -3,8 +3,9 @@ const Yuna = require("./src/client.js");
 const cron = require("cron").CronJob;
 
 // const
-const botId = '504996285900783638';
-const guildId = '393936202123968513';
+const botId = '504996285900783638';			// Check
+const guildId = '393936202123968513';		// Check
+const MEMBER_ROLE = '505583948169084929';	// Check
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const HelpCommand = require('./src/commands/help.js');
@@ -24,11 +25,10 @@ var mainChannel = null;
 
 bot.once("ready", function () {
 	const guild = bot.guilds.get(guildId);
-	const notifications = guild.channels.find('name', 'notifications');
 	const member = guild.members.get(botId);
 	
 	bot.user.setGame("Witchcraft | /help");
-	mainChannel = guild.channels.find("name","bot");
+	mainChannel = guild.channels.find("name", "text"); 		// *Check this when editing channel names
 	
 	const rawCommands = [
 		WarnCommand,
@@ -69,9 +69,12 @@ bot.once("ready", function () {
 const blockedWords = ["loli"];
 
 bot.on("message", function (msg) {
-	if (msg.author == bot.user)
-		return
+	if (msg.author == bot.user) return
 	
+	if (msg.channel != mainChannel && msg.content.toLowerCase().match("agree")){
+		msg.author.addRole(MEMBER_ROLE);
+	}
+
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
 		var cmdTxt = msg.content.split(" ")[0].substring(1);
         var suffix = msg.content.substring(cmdTxt.length + 2);

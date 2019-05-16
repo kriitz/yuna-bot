@@ -23,14 +23,13 @@ module.exports = class WipeCommand extends Command{
 	* @return {string}
 	*/
 	process(msg, suffix){
-		const numDeletion = parseInt(suffix);
-		if (typeof(numDeletion) !== 'number')
+		if (typeof(parseInt(suffix)) !== 'number')
 			return "you entered a bad suffix. Your suffix needs to be a number.";
 		
 		msg.channel.fetchMessages({limit:numDeletion}).then(
-			msg.channel.bulkDelete(numDeletion)
+			msg.channel.bulkDelete(numDeletion).then(messages => msg.reply(`${messages.size} messages have been deleted`))
 		);
 		
-		return `${numDeletion} messages have been deleted`;
+		return;
 	}
 }
