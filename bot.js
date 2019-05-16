@@ -72,7 +72,7 @@ bot.on("message", function (msg) {
 	if (msg.author == bot.user) return
 	
 	if (msg.channel != mainChannel && msg.content.toLowerCase().match("agree")){
-		msg.author.addRole(MEMBER_ROLE);
+		msg.member.addRole(MEMBER_ROLE);
 	}
 
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
