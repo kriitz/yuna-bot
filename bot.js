@@ -1,4 +1,9 @@
-//
+/*
+	Central control script for Yuna bot.
+	- Yuna bot is designed for the Witchcraft Discord Server
+
+	- Programmed by Philip "Kritz" Nguyen
+*/
 const Yuna = require("./src/client.js");
 const cron = require("cron").CronJob;
 
@@ -27,9 +32,13 @@ bot.once("ready", function () {
 	const guild = bot.guilds.get(guildId);
 	const member = guild.members.get(botId);
 	
-	bot.user.setGame("Witchcraft | /help");
 	mainChannel = guild.channels.find("name", "text"); 		// *Check this when editing channel names
-	
+	if(mainChannel == null){
+		bot.user.setGame("Main");
+	}else{
+		bot.user.setGame("Witchcraft | /help");
+	}
+
 	const rawCommands = [
 		WarnCommand,
 		HelpCommand,
@@ -44,7 +53,6 @@ bot.once("ready", function () {
   	];
   
 	bot.initializeCommands(rawCommands);
-	mainChannel.send("Ready to begin!");
 
 	// Cronjobs
 	/*
@@ -66,13 +74,14 @@ bot.once("ready", function () {
 	*/
 });
 
-const blockedWords = ["loli"];
+const BLOCK_WORDS = ["loli"];
 
 bot.on("message", function (msg) {
 	if (msg.author == bot.user) return
 	
 	if (msg.channel != mainChannel && msg.content.toLowerCase().match("agree")){
 		msg.member.addRole(MEMBER_ROLE);
+		msg.delete();
 	}
 
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
@@ -95,8 +104,8 @@ bot.on("message", function (msg) {
 		}
 	}else{
 		if (msg.mentions.users.first() !== bot.user){
-			for (var index in blockedWords){
-				if(msg.content.toLowerCase().match(blockedWords[index])){
+			for (var index in BLOCK_WORDS){
+				if(msg.content.toLowerCase().match(BLOCK_WORDS[index])){
 					msg.reply("Your message was deleted, we do not condone dark humor or loliconic on our server. \n\t" + msg.author.username + " you have been warned.")
 					msg.delete();
 				}	
