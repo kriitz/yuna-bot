@@ -26,6 +26,6 @@ module.exports = class AwaitCommand extends Command{
 		});
 
 		msg.delete();
-		return `We are awaiting a special...`;
+		return `We are awaiting a special someone...`;
 	}
 }

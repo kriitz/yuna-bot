@@ -88,8 +88,10 @@ bot.on("guildMemberAdd", function (member){
 			let awaiting = cSnapshot.val();
 			if(member.id == awaiting.id){
 				member.addRole(MEMBER_ROLE);
-				member.send("We were waiting for you! You have been automatically added to our system and we also skipped your background checks! Welcome to the team. If you have any questions you can send them my way, I will not reply but at least you feel better.");
+				member.send("We were waiting for you! You have been automatically added to our system and we also skipped your background checks! Welcome to the team.");
 				mainChannel.send(`<@${member.id}>, ${awaiting.message}`);
+
+				bot.database.ref(`bot/${guildId}/awaits/${cSnapshot.key}`).set(null);
 			}
 		});
 	});

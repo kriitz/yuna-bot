@@ -29,12 +29,12 @@ module.exports = class CommandsCommand extends Command{
     		if (commands[cmd].hasPermission(msg) && printedCmds.includes(commands[cmd]) == false){
 			printedCmds.push(commands[cmd]);
 	    		info += "**" + cmd + ":**";
-	    		
+	    		/*
 	    		var usage = commands[cmd].get('usage');
 	    		if(usage !== "")
 	    			info += " " + usage + "\n";
-	    		
-	    		info += "\t\t" + commands[cmd].description + "\n\n";
+	    		*/
+	    		info += " " + commands[cmd].description + "\n";
     		}
     	}
     	msg.author.send(info);
