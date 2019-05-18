@@ -82,7 +82,6 @@ bot.once("ready", function () {
 
 bot.on("guildMemberAdd", function (member){
 	const data = bot.database.ref(`bot/${guildId}/awaits`);
-	testChannel.send(member.id);
 
 	data.once('value', function(snapshot){
 		snapshot.forEach(function(cSnapshot){
@@ -90,7 +89,7 @@ bot.on("guildMemberAdd", function (member){
 			if(member.id == awaiting.id){
 				member.addRole(MEMBER_ROLE);
 				member.send("We were waiting for you! You have been automatically added to our system and we also skipped your background checks! Welcome to the team. If you have any questions you can send them my way, I will not reply but at least you feel better.");
-				mainChannel.send(`@${member.user.username}, ${awaiting.message}`);
+				mainChannel.send(`<@${member.id}>, ${awaiting.message}`);
 			}
 		});
 	});
