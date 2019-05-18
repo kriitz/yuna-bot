@@ -24,6 +24,7 @@ const happyBirthDayCommand = require('./src/commands/happyBirthDay.js');
 const AddEventCommand = require('./src/commands/addevent.js');
 const WipeCommand = require('./src/commands/wipe.js');
 const RemoveEventCommand = require('./src/commands/removeevent.js');
+const AwaitCommand = require('./src/commands/await.js');
 
 const bot = new Yuna();
 var mainChannel = null;
@@ -36,7 +37,7 @@ bot.once("ready", function () {
 	if(mainChannel == null){
 		bot.user.setGame("Error: Main channel not found.");
 	}else{
-		//bot.user.setUsername("Yuna");
+		bot.user.setUsername("Yuna");
 		bot.user.setGame("Witchcraft | /help");
 	}
 
@@ -51,6 +52,7 @@ bot.once("ready", function () {
 		happyBirthDayCommand,
 		AddEventCommand,
 		WipeCommand,
+		AwaitCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
@@ -75,7 +77,7 @@ bot.once("ready", function () {
 	*/
 });
 
-bot.on("guildMemberAdd", function (member)){
+bot.on("guildMemberAdd", function (member){
 	const data = this.bot.database.ref(`bot/${guildId}/awaits`);
 
 	data.once('value', function(snapshot){
@@ -88,7 +90,7 @@ bot.on("guildMemberAdd", function (member)){
 			}
 		});
 	});
-}
+});
 
 const BLOCK_WORDS = ["loli"];
 
