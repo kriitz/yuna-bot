@@ -34,8 +34,9 @@ bot.once("ready", function () {
 	
 	mainChannel = guild.channels.find("name", "text"); 		// *Check this when editing channel names
 	if(mainChannel == null){
-		bot.user.setGame("Main");
+		bot.user.setGame("Error: Main channel not found.");
 	}else{
+		bot.user.setUsername("Yuna");
 		bot.user.setGame("Witchcraft | /help");
 	}
 
@@ -74,14 +75,30 @@ bot.once("ready", function () {
 	*/
 });
 
+bot.on("guildMemberAdd", function (member)){
+	const data = this.bot.database.ref(`bot/${guildId}/awaits`);
+
+	data.once('value', function(snapshot){
+		snapshot.forEach(function(cSnapshot){
+			let awaiting = cSnapshot.val();
+			if(member.id == awaiting.id){
+				member.addRole(MEMBER_ROLE);
+				member.send("We were waiting for you! You have been automatically added to our system and we also skipped your background checks! Welcome to the team. If you have any questions you can send them my way, I will not reply but at least you feel better.");
+				mainChannel.send(`@${member.user.username} ${awaiting.message}`);
+			}
+		});
+	});
+}
+
 const BLOCK_WORDS = ["loli"];
 
 bot.on("message", function (msg) {
-	if (msg.author == bot.user) return
+	if (msg.author == bot.user) return;
 	
-	if (msg.channel != mainChannel && msg.content.toLowerCase().match("agree")){
-		msg.member.addRole(MEMBER_ROLE);
+	if(msg.channel != mainChannel){
+		if(msg.content.toLowerCase().match("agree")) msg.member.addRole(MEMBER_ROLE);
 		msg.delete();
+		return;
 	}
 
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
