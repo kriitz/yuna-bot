@@ -8,9 +8,9 @@ const Yuna = require("./src/client.js");
 const cron = require("cron").CronJob;
 
 // const
-const botId = '504996285900783638';			// Check
-const guildId = '393936202123968513';		// Check
-const MEMBER_ROLE = '505583948169084929';	// Check
+const botId = '504996285900783638';				// Check
+const guildId = '393936202123968513';			// Check
+const MEMBER_ROLE = '505583948169084929';		// Check
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const HelpCommand = require('./src/commands/help.js');
@@ -28,12 +28,14 @@ const AwaitCommand = require('./src/commands/await.js');
 
 const bot = new Yuna();
 var mainChannel = null;
+var testChannel = null;
 
 bot.once("ready", function () {
 	const guild = bot.guilds.get(guildId);
 	const member = guild.members.get(botId);
 	
 	mainChannel = guild.channels.find("name", "text"); 		// *Check this when editing channel names
+	testChannel = guild.channels.find("name", "test-bot");
 	if(mainChannel == null){
 		bot.user.setGame("Error: Main channel not found.");
 	}else{
@@ -81,12 +83,14 @@ bot.on("guildMemberAdd", function (member){
 	const data = this.bot.database.ref(`bot/${guildId}/awaits`);
 
 	data.once('value', function(snapshot){
+		testChannel.send(member.id);
+
 		snapshot.forEach(function(cSnapshot){
 			let awaiting = cSnapshot.val();
 			if(member.id == awaiting.id){
 				member.addRole(MEMBER_ROLE);
 				member.send("We were waiting for you! You have been automatically added to our system and we also skipped your background checks! Welcome to the team. If you have any questions you can send them my way, I will not reply but at least you feel better.");
-				mainChannel.send(`@${member.user.username} ${awaiting.message}`);
+				mainChannel.send(`@${member.user.username}, ${awaiting.message}`);
 			}
 		});
 	});
@@ -97,7 +101,7 @@ const BLOCK_WORDS = ["loli"];
 bot.on("message", function (msg) {
 	if (msg.author == bot.user) return;
 	
-	if(msg.channel != mainChannel){
+	if(msg.channel != mainChannel && msg.channel != testChannel){
 		if(msg.content.toLowerCase().match("agree")) msg.member.addRole(MEMBER_ROLE);
 		msg.delete();
 		return;
