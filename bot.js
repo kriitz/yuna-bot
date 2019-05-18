@@ -81,7 +81,7 @@ bot.once("ready", function () {
 });
 
 bot.on("guildMemberAdd", function (member){
-	const data = this.bot.database.ref(`bot/${guildId}/awaits`);
+	const data = bot.database.ref(`bot/${guildId}/awaits`);
 	testChannel.send(member.id);
 
 	data.once('value', function(snapshot){
