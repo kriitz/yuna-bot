@@ -40,6 +40,7 @@ bot.once("ready", function () {
 		bot.user.setGame("Error: Main channel not found.");
 	}else{
 		//bot.user.setUsername("Yuna");
+		testChannel.send("Ready to go.");
 		bot.user.setGame("Witchcraft | /help");
 	}
 
