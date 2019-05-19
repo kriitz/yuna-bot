@@ -26,7 +26,7 @@ module.exports = class InfoCommand extends Command{
 
 
 		data.once('value', function(snapshot){
-			var introduction = (!snapshot.exists())? "None" : snapshot.intro;
+			var introduction = (!snapshot.exists())? "None" : snapshot.val().intro;
 
 			if (!snapshot.exists()){
 				this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
