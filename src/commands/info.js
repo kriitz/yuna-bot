@@ -45,6 +45,7 @@ module.exports = class InfoCommand extends Command{
 				});
 			}
 			msg.reply("No");
+			/*
 			msg.channel.send("", {embed: {
 				color: 3447003,
 				author: {
@@ -58,6 +59,7 @@ module.exports = class InfoCommand extends Command{
 					text: 'Reputation: 0'
 				}
 			}})
+			*/
 		});
 
 		//msg.delete();
