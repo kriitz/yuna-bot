@@ -35,7 +35,12 @@ module.exports = class InfoCommand extends Command{
 		*/
 
 		data.once('value', function(snapshot){
-			var introduction = (!snapshot.exists())? "None" : snapshot.val().intro;
+			var introduction = "";
+			
+			if (snapshot.exists()){
+				introduction = snapshot.val().intro;
+			}
+
 			/*
 			if (snapshot.exists() == false){
 				msg.reply("OKay");
@@ -58,7 +63,7 @@ module.exports = class InfoCommand extends Command{
 				footer: {
 					text: 'Reputation: 0'
 				}
-			}})
+			}});
 			
 		});
 
