@@ -36,15 +36,18 @@ module.exports = class InfoCommand extends Command{
 
 		data.once('value', function(snapshot){
 			//var introduction = (!snapshot.exists())? "None" : snapshot.val().intro;
-			/*
+			
 			if (snapshot.exists() == false){
 				msg.reply("OKay");
+				/*
 				this.bot.database.ref(`bot/${msg.guild.id}/users`).child(user.id).setValue({
 					id: id,
 					message: message,
 				});
+
+				*/
 			}
-			*/
+			
 			msg.reply("No");
 			/*
 			msg.channel.send("", {embed: {
