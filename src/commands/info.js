@@ -60,7 +60,7 @@ module.exports = class InfoCommand extends Command{
 			}})
 		});
 
-		msg.delete();
+		//msg.delete();
 		return user.id;
 	}
 }
