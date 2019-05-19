@@ -21,8 +21,6 @@ module.exports = class InfoCommand extends Command{
 	process(msg, suffix){
 		var user = msg.mentions.users.first();
 		if (user == null) user = msg.author;
-		msg.reply("0");
-		msg.reply("0.5");
 		//this.bot.database.ref(`bot/${msg.guild.id}/events`)
 		var data = this.bot.database.ref(`bot/${msg.guild.id}/users`);
 		msg.reply("1");
