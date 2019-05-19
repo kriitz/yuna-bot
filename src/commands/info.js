@@ -39,7 +39,7 @@ module.exports = class InfoCommand extends Command{
 			
 			if (snapshot.exists() == false){
 				msg.reply("OKay");
-				this.bot.database.ref(`bot/${msg.guild.id}/users`).child(user.id).setValue({
+				this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
 					link: "",
 					intro: "",
 				});
