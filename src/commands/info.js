@@ -22,8 +22,20 @@ module.exports = class InfoCommand extends Command{
 		var user = msg.mentions.users.first();
 		if (user == null) user = msg.author;
 		msg.reply("0");
-		var data = this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`);
+		var data = this.bot.database.ref(`bot/${msg.guild.id}/users`);
 		msg.reply("1");
+
+		data.once('value', function(snapshot){
+			if(!snapshot.hasChild(user.id)){
+				this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
+					link: '',
+					intro: 'None'
+				});
+			}
+		});
+
+		data = this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`);
+
 		data.once('value', function(snapshot){
 			var introduction = (!snapshot.exists())? "None" : snapshot.val().intro;
 
