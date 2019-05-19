@@ -5,6 +5,9 @@ module.exports = class AwaitCommand extends Command{
 		super(bot, {
 			name: 'await',
 			usage: '<User ID> <string>',
+			alias: [
+				'waitfor'
+			],
 			options: [
 			],
 			description: "Wait for a user to enter the server and give them a warm welcome.",
