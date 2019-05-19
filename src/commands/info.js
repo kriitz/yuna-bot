@@ -23,15 +23,18 @@ module.exports = class InfoCommand extends Command{
 		if (user == null) user = msg.author;
 
 		var data = this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`);
-		if (data == null){
-			bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
-				link: '',
-				intro: ''
-			});
-			data = this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`);
-		}
+
 
 		data.once('value', function(snapshot){
+			var introduction = (snapshot.intro == null)? "None" : snapshot.intro;
+
+			if (snapshot.intro == null){
+				bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
+					link: '',
+					intro: 'None'
+				});
+			}
+
 			msg.channel.send("", {embed: {
 				color: 3447003,
 				author: {

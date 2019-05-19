@@ -23,7 +23,7 @@ module.exports = class SetIntroCommand extends Command{
 		const oldInfo = this.bot.database.ref(`bot/${msg.guild.id}/user/${msg.author.id}`);
 		
 		this.bot.database.ref(`bot/${msg.guild.id}/user/${msg.author.id}`).update({
-			link: (oldInfo == null)? '' : oldInfo.,
+			link: (oldInfo == null)? '' : oldInfo.link,
 			intro: suffix,
 		});
 		return oldIntro.slice(0, 20) + '... **=>** ' + suffix.slice(0,20) + '...';
