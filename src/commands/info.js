@@ -21,7 +21,7 @@ module.exports = class InfoCommand extends Command{
 	process(msg, suffix){
 		var user = msg.mentions.users.first();
 		if (user == null) user = msg.author;
-
+		msg.reply("0");
 		var data = this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`);
 		msg.reply("1");
 		data.once('value', function(snapshot){
