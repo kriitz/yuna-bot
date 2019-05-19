@@ -26,9 +26,9 @@ module.exports = class InfoCommand extends Command{
 
 
 		data.once('value', function(snapshot){
-			var introduction = (snapshot == null)? "None" : snapshot.intro;
+			var introduction = (!snapshot.exists())? "None" : snapshot.intro;
 
-			if (snapshot.intro == null){
+			if (!snapshot.exists()){
 				bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
 					link: '',
 					intro: 'None'
@@ -40,7 +40,7 @@ module.exports = class InfoCommand extends Command{
 				author: {
 					name: user.username
 				},
-				description: snapshot.intro,
+				description: introduction,
 				thumbnail: {
 					url: user.avatarURL
 				},
