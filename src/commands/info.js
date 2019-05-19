@@ -26,9 +26,9 @@ module.exports = class InfoCommand extends Command{
 
 
 		data.once('value', function(snapshot){
-			var introduction = (snapshot.intro == null)? "None" : snapshot.intro;
+			var introduction = (snapshot == null)? "None" : snapshot.intro;
 
-			if (snapshot.intro == null){
+			if (snapshot == null){
 				bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
 					link: '',
 					intro: 'None'
