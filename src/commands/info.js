@@ -35,8 +35,8 @@ module.exports = class InfoCommand extends Command{
 		*/
 
 		data.once('value', function(snapshot){
-			//var introduction = (!snapshot.exists())? "None" : snapshot.val().intro;
-			
+			var introduction = (!snapshot.exists())? "None" : snapshot.val().intro;
+			/*
 			if (snapshot.exists() == false){
 				msg.reply("OKay");
 				this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
@@ -44,15 +44,14 @@ module.exports = class InfoCommand extends Command{
 					intro: "",
 				});
 			}
+			*/
 			
-			msg.reply("No");
-			/*
 			msg.channel.send("", {embed: {
 				color: 3447003,
 				author: {
 					name: user.username
 				},
-				description: "",
+				description: introduction,
 				thumbnail: {
 					url: user.avatarURL
 				},
@@ -60,7 +59,7 @@ module.exports = class InfoCommand extends Command{
 					text: 'Reputation: 0'
 				}
 			}})
-			*/
+			
 		});
 
 		//msg.delete();
