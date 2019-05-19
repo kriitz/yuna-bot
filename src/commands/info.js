@@ -23,8 +23,7 @@ module.exports = class InfoCommand extends Command{
 		if (user == null) user = msg.author;
 		//this.bot.database.ref(`bot/${msg.guild.id}/events`)
 		var data = this.bot.database.ref(`bot/${msg.guild.id}/users`);
-		msg.reply("1");
-
+		/*
 		data.once('value', function(snapshot){
 			if(!snapshot.hasChild(user.id)){
 				this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
@@ -33,7 +32,7 @@ module.exports = class InfoCommand extends Command{
 				});
 			}
 		});
-
+		*/
 		data = this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`);
 
 		data.once('value', function(snapshot){
