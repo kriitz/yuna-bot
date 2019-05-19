@@ -29,7 +29,7 @@ module.exports = class InfoCommand extends Command{
 			var introduction = (!snapshot.exists())? "None" : snapshot.intro;
 
 			if (!snapshot.exists()){
-				bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
+				this.bot.database.ref(`bot/${msg.guild.id}/users/${user.id}`).set({
 					link: '',
 					intro: 'None'
 				});
