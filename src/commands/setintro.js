@@ -20,12 +20,25 @@ module.exports = class SetIntroCommand extends Command{
 	}
 
 	process(msg, suffix){
-		const oldInfo = this.bot.database.ref(`bot/${msg.guild.id}/user/${msg.author.id}`);
+		const oldInfo = this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`);
 		
-		this.bot.database.ref(`bot/${msg.guild.id}/user/${msg.author.id}`).update({
-			link: (oldInfo == null)? '' : oldInfo.link,
-			intro: suffix,
-		});
+		//
+		var dataIntro = suffix;
+		var dataLink = "";
+
+		oldInfo.once('value', function(snapshot){
+			if(snapshot.exist()){
+				dataLink = snapshot.val().link;
+			}
+		}).then(
+			this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).set({
+				link: dataLink,
+				intro: dataIntro,
+			})
+		);
+
+
+
 		return oldIntro.slice(0, 20) + '... **=>** ' + suffix.slice(0,20) + '...';
 	}
 }

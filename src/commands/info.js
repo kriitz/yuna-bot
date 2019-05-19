@@ -35,7 +35,7 @@ module.exports = class InfoCommand extends Command{
 		*/
 
 		data.once('value', function(snapshot){
-			var introduction = "";
+			var introduction = "None";
 			
 			if (snapshot.exists()){
 				introduction = snapshot.val().intro;

@@ -25,6 +25,7 @@ const AddEventCommand = require('./src/commands/addevent.js');
 const WipeCommand = require('./src/commands/wipe.js');
 const RemoveEventCommand = require('./src/commands/removeevent.js');
 const AwaitCommand = require('./src/commands/await.js');
+const SetIntroCommand = require('./src/commands/setintro.js');
 
 const bot = new Yuna();
 var mainChannel = null;
@@ -56,6 +57,7 @@ bot.once("ready", function () {
 		AddEventCommand,
 		WipeCommand,
 		AwaitCommand,
+		SetIntroCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
@@ -119,7 +121,7 @@ bot.on("message", function (msg) {
 					const replyContent = cmd.process(msg, suffix);
 					if (replyContent) msg.reply(replyContent);
 				}catch(error){
-					mainChannel.send("Command " + cmdTxt + " failed. \n" + error.stack);
+					testChannel.send("Command " + cmdTxt + " failed. \n" + error.stack);
 				}
 				console.log(cmdTxt + " command excuted.");						
 			}else{
