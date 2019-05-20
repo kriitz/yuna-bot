@@ -21,20 +21,16 @@ module.exports = class SetIntroCommand extends Command{
 
 	process(msg, suffix){
 		const oldInfo = this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`);
-		
-		var oldIntro = "None";
 
-		//
-		var newData = {};
-		var dataIntro = suffix;
-		var dataLink = "";
+		var intro = "None";
+		var link = "";
 
 		oldInfo.once('value').then(function(snapshot){
 			if(snapshot.exist()){
 				oldData = snapshot.val();
 
-				newData['link'] = oldData.link;
-				newData['intro'] = oldData.intro;
+				link = oldData.link;
+				intro = oldData.intro;
 			}
 			this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).child('intro').setValue(intro);
 		});
