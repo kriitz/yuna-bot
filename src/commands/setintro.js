@@ -28,7 +28,7 @@ module.exports = class SetIntroCommand extends Command{
 		oldInfo.once('value').then(function(snapshot){
 			this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).set({
 				intro: suffix,
-				link: snapshot.val().link;
+				link: snapshot.val().link,
 			});
 		});
 
