@@ -26,13 +26,7 @@ module.exports = class SetIntroCommand extends Command{
 		var link = "";
 
 		oldInfo.once('value').then(function(snapshot){
-			if(snapshot.exist()){
-				oldData = snapshot.val();
-
-				link = oldData.link;
-				intro = oldData.intro;
-			}
-			this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).child('intro').setValue(intro);
+			this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).child('intro').setValue(suffix);
 		});
 
 		return 'Successful setted a new intro';
