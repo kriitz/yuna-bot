@@ -39,7 +39,9 @@ module.exports = class SetIntroCommand extends Command{
 			this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).set({
 				link: dataLink,
 				intro: dataIntro,
-			})
+			}).catch(
+				msg.reply("2")
+			)
 		).catch(
 			msg.reply("Broke")
 		);
