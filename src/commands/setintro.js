@@ -23,8 +23,6 @@ module.exports = class SetIntroCommand extends Command{
 		return msg.member.hasPermission("CREATE_INSTANT_INVITE");
 	}
 
-	function 
-
 	process(msg, suffix){
 		const oldInfo = this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`);
 		
