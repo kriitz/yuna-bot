@@ -40,6 +40,8 @@ module.exports = class SetIntroCommand extends Command{
 				link: dataLink,
 				intro: dataIntro,
 			})
+		).catch(
+			msg.reply("Broke")
 		);
 
 
