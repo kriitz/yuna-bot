@@ -48,6 +48,6 @@ module.exports = class SetIntroCommand extends Command{
 
 
 
-		return oldIntro.slice(0, 20) + '... **=>** ' + suffix.slice(0,20) + '...';
+		return 'Successful setted a new intro';
 	}
 }
