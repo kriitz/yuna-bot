@@ -52,7 +52,6 @@ module.exports = class InfoCommand extends Command{
 			}});
 		});
 
-		msg.delete();
 		return;
 	}
 }

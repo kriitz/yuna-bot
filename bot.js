@@ -15,7 +15,6 @@ const MEMBER_ROLE = '505583948169084929';		// Check
 // [[ Imports ]] const  = require('./src/commands/.js');
 const HelpCommand = require('./src/commands/help.js');
 const WarnCommand = require('./src/commands/warn.js');
-const InfoCommand = require('./src/commands/info.js');
 const CommandsCommand = require('./src/commands/commands.js');
 const EventsCommand = require('./src/commands/events.js');
 const VersionCommand = require('./src/commands/version.js');
@@ -25,7 +24,10 @@ const AddEventCommand = require('./src/commands/addevent.js');
 const WipeCommand = require('./src/commands/wipe.js');
 const RemoveEventCommand = require('./src/commands/removeevent.js');
 const AwaitCommand = require('./src/commands/await.js');
+
+const InfoCommand = require('./src/commands/info.js');
 const SetIntroCommand = require('./src/commands/setintro.js');
+const SetLinkCommand = require('./src/commands/setlink.js');
 
 const bot = new Yuna();
 var mainChannel = null;
@@ -58,6 +60,7 @@ bot.once("ready", function () {
 		WipeCommand,
 		AwaitCommand,
 		SetIntroCommand,
+		SetLinkCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
