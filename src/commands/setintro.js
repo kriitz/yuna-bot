@@ -29,7 +29,7 @@ module.exports = class SetIntroCommand extends Command{
 		var dataIntro = suffix;
 		var dataLink = "";
 
-		oldInfo.once('value', function(snapshot){
+		oldInfo.once('value').then(function(snapshot){
 			if(snapshot.exist()){
 				oldData = snapshot.val();
 
