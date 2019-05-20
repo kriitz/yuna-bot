@@ -55,7 +55,7 @@ module.exports = class InfoCommand extends Command{
 			}
 			*/
 			
-			msg.channel.send("", {embed: {
+			msg.channel.send("Profile", {embed: {
 				color: 3447003,
 				author: {
 					name: user.username
