@@ -1,9 +1,5 @@
 const Command = require('../command.js');
 
-function setIntro(intro){
-	this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).child('intro').setValue(intro);
-}
-
 module.exports = class SetIntroCommand extends Command{
 	constructor(bot){
 		super(bot, {
@@ -40,7 +36,7 @@ module.exports = class SetIntroCommand extends Command{
 				newData['link'] = oldData.link;
 				newData['intro'] = oldData.intro;
 			}
-			setIntro(oldData.intro);
+			this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).child('intro').setValue(intro);
 		});
 
 		return 'Successful setted a new intro';
