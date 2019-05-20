@@ -25,6 +25,7 @@ module.exports = class SetIntroCommand extends Command{
 		var oldIntro = "None";
 
 		//
+		var newData = {};
 		var dataIntro = suffix;
 		var dataLink = "";
 
@@ -32,17 +33,21 @@ module.exports = class SetIntroCommand extends Command{
 			if(snapshot.exist()){
 				oldData = snapshot.val();
 
-				dataLink = oldData.link;
-				oldIntro = oldData.intro;
+				newData['link'] = oldData.link;
+				newData['intro'] = oldData.intro;
 			}
 		}, function(error){
 			if(error){
-				msg.reply("Set failed")
+				return "Set failed";
 			}else{
+				this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).update(newData);
+
+				/*
 				this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).set({
 					link: dataLink,
 					intro: dataIntro,
 				});
+				*/
 			}
 		});
 
