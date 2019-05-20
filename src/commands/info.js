@@ -36,9 +36,13 @@ module.exports = class InfoCommand extends Command{
 
 		data.once('value', function(snapshot){
 			var introduction = "None";
+			var link = "https://www.youtube.com/";
 			
 			if (snapshot.exists()){
-				introduction = snapshot.val().intro;
+				var snapValue = snapshot.val();
+
+				introduction = snapValue.intro;
+				link = snapValue.link;
 			}
 
 			/*
@@ -57,6 +61,7 @@ module.exports = class InfoCommand extends Command{
 					name: user.username
 				},
 				description: introduction,
+				url: link,
 				thumbnail: {
 					url: user.avatarURL
 				},
@@ -67,7 +72,7 @@ module.exports = class InfoCommand extends Command{
 			
 		});
 
-		//msg.delete();
-		return user.id;
+		msg.delete();
+		return;
 	}
 }
