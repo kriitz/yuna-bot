@@ -35,15 +35,13 @@ module.exports = class SetIntroCommand extends Command{
 				dataLink = oldData.link;
 				oldIntro = oldData.intro;
 			}
-		}).then(
-			this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).set({
-				link: dataLink,
-				intro: dataIntro,
-			}).catch(
-				msg.reply("2")
-			)
-		).catch(
-			msg.reply("Broke")
+		});
+		
+		this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).set({
+			link: dataLink,
+			intro: dataIntro,
+		}).catch(
+			msg.reply("2")
 		);
 
 		return 'Successful setted a new intro';
