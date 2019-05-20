@@ -40,7 +40,7 @@ module.exports = class SetIntroCommand extends Command{
 			if(error){
 				return "Set failed";
 			}else{
-				this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).update(newData);
+				this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).child('intro').setValue(newData['intro']);
 
 				/*
 				this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).set({
