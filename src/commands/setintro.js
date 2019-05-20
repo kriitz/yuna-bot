@@ -1,5 +1,9 @@
 const Command = require('../command.js');
 
+function setIntro(intro){
+	this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).child('intro').setValue(intro);
+}
+
 module.exports = class SetIntroCommand extends Command{
 	constructor(bot){
 		super(bot, {
@@ -19,6 +23,8 @@ module.exports = class SetIntroCommand extends Command{
 		return msg.member.hasPermission("CREATE_INSTANT_INVITE");
 	}
 
+	function 
+
 	process(msg, suffix){
 		const oldInfo = this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`);
 		
@@ -36,19 +42,7 @@ module.exports = class SetIntroCommand extends Command{
 				newData['link'] = oldData.link;
 				newData['intro'] = oldData.intro;
 			}
-		}, function(error){
-			if(error){
-				return "Set failed";
-			}else{
-				this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).child('intro').setValue(newData['intro']);
-
-				/*
-				this.bot.database.ref(`bot/${msg.guild.id}/users/${msg.author.id}`).set({
-					link: dataLink,
-					intro: dataIntro,
-				});
-				*/
-			}
+			setIntro(oldData.intro);
 		});
 
 		return 'Successful setted a new intro';
