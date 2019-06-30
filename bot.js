@@ -8,6 +8,7 @@ const Yuna = require("./src/client.js");
 const cron = require("cron").CronJob;
 
 // const
+const OWNER_ID = '89488149201326080';
 const botId = '504996285900783638';				// Check
 const guildId = '393936202123968513';			// Check
 const MEMBER_ROLE = '505583948169084929';		// Check
@@ -84,7 +85,20 @@ bot.once("ready", function () {
 	}, null, true, "America/Los_Angeles");
 	*/
 });
+/*
+bot.on("messageReactionAdd", function (reaction, user){
+	var message = reaction.message;
+	var op = message.author;
+	if(user == op) return
 
+	if(reaction.emoji.name == "star"){
+		bot.database.ref(`bot/${guildId}/users/${op.id}/reputation`).once(){
+			var rep = snapshot.val();
+			rep = 
+		}
+	}
+});
+*/
 bot.on("guildMemberAdd", function (member){
 	const data = bot.database.ref(`bot/${guildId}/awaits`);
 
@@ -107,10 +121,12 @@ const BLOCK_WORDS = ["loli"];
 bot.on("message", function (msg) {
 	if (msg.author == bot.user) return;
 	
-	if(msg.channel != mainChannel && msg.channel != testChannel){
-		if(msg.content.toLowerCase().match("agree")) msg.member.addRole(MEMBER_ROLE);
-		msg.delete();
-		return;
+	if(msg.author.id != OWNER_ID){
+		if(msg.channel != mainChannel && msg.channel != testChannel){
+			if(msg.content.toLowerCase().match("agree")) msg.member.addRole(MEMBER_ROLE);
+			msg.delete();
+			return;
+		}
 	}
 
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
