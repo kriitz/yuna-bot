@@ -1,5 +1,4 @@
-# yuna-bot
-Guilty was here.
+# yuna bot
 
 ## Commands
 Here are the available commands.
