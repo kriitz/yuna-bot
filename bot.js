@@ -10,8 +10,9 @@ const cron = require("cron").CronJob;
 // const
 const OWNER_ID = '89488149201326080';
 const botId = '504996285900783638';				// Check
-const guildId = '393936202123968513';			// Check
-const MEMBER_ROLE = '505583948169084929';		// Check
+const guildId = '393936202123968513';				// Check
+const MEMBER_ROLE = '505583948169084929';			// Check
+const INIT_CHANNEL_ID = '578376730092240897';			// Check
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const HelpCommand = require('./src/commands/help.js');
@@ -31,8 +32,10 @@ const SetIntroCommand = require('./src/commands/setintro.js');
 const SetLinkCommand = require('./src/commands/setlink.js');
 
 const bot = new Yuna();
+
 var mainChannel = null;
 var testChannel = null;
+var initChannel = null;
 
 bot.once("ready", function () {
 	const guild = bot.guilds.get(guildId);
@@ -40,6 +43,8 @@ bot.once("ready", function () {
 	
 	mainChannel = guild.channels.find("name", "text"); 		// *Check this when editing channel names
 	testChannel = guild.channels.find("name", "test-bot");
+	initChannel = guild.channels.get(INIT_CHANNEL_ID);
+	
 	if(mainChannel == null){
 		bot.user.setGame("Error: Main channel not found.");
 	}else{
@@ -122,7 +127,7 @@ bot.on("message", function (msg) {
 	if (msg.author == bot.user) return;
 	
 	if(msg.author.id != OWNER_ID){
-		if(msg.channel != mainChannel && msg.channel != testChannel){
+		if(msg.channel == initChannel){
 			if(msg.content.toLowerCase().match("agree")) msg.member.addRole(MEMBER_ROLE);
 			msg.delete();
 			return;
@@ -131,7 +136,7 @@ bot.on("message", function (msg) {
 
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
 		var cmdTxt = msg.content.split(" ")[0].substring(1);
-        var suffix = msg.content.substring(cmdTxt.length + 2);
+        	var suffix = msg.content.substring(cmdTxt.length + 2);
 		var cmd = bot.commands()[cmdTxt];
 
 		if(cmd){
