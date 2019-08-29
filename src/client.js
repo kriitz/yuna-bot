@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const firebase = require("firebase");
-const twilio = require("twilio")(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+const twilio = require("twilio")(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 twilio.messages.create({
 	body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-	from: TWILIO_PHONE_NUMBER,
+	from: process.env.TWILIO_PHONE_NUMBER,
 	to: '+15037299487'
 	}).then(message => console.log(message.sid));
 
