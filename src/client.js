@@ -1,6 +1,13 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const firebase = require("firebase");
+const twilio = require('twilio')(accountSid, authToken);
+
+twilio.messages.create({
+    body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+    from: '+19712323401',
+    to: '+15037299487'
+   }).then(message => console.log(message.sid));
 
 const config = {
 	apiKey: process.env.FIREBASE_TOKEN,
