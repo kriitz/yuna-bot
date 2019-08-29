@@ -1,5 +1,5 @@
 const Command = require('../command.js');
-const twilio = require("twilio");
+const twilio = require("twilio")(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 module.exports = class SMSCommand extends Command{
 	constructor(bot){
