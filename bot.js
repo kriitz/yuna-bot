@@ -26,6 +26,7 @@ const AddEventCommand = require('./src/commands/addevent.js');
 const WipeCommand = require('./src/commands/wipe.js');
 const RemoveEventCommand = require('./src/commands/removeevent.js');
 const AwaitCommand = require('./src/commands/await.js');
+const SMSCommand = require('./src/commands/sms.js');
 
 const InfoCommand = require('./src/commands/info.js');
 const SetIntroCommand = require('./src/commands/setintro.js');
@@ -67,6 +68,7 @@ bot.once("ready", function () {
 		AwaitCommand,
 		SetIntroCommand,
 		SetLinkCommand,
+		SMSCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
