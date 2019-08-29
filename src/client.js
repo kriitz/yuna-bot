@@ -2,13 +2,25 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const firebase = require("firebase");
 const twilio = require("twilio")(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-/*
-twilio.messages.create({
-	body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-	from: process.env.TWILIO_PHONE_NUMBER,
-	to: '+15037299487'
-	}).then(message => console.log(message.sid));
-*/
+const http = require('http');
+const express = require('express');
+const MessagingResponse = twilio.twiml.MessagingResponse;
+
+const app = express();
+
+app.post('/sms', (req, res) => {
+	const twiml = new MessagingResponse();
+
+	twiml.message('The Robots are coming! Head for the hills!');
+
+	res.writeHead(200, {'Content-Type': 'text/xml'});
+	res.end(twiml.toString());
+});
+
+http.createServer(app).listen(1337, () => {
+	console.log('Express server listening on port 1337');
+});
+
 const config = {
 	apiKey: process.env.FIREBASE_TOKEN,
 	authDomain: "yuna-bot7.firebaseapp.com",
