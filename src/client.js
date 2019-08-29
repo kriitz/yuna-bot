@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const firebase = require("firebase");
-const twilio = require("twilio")(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+const twilioClient = require("twilio")(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 const http = require('http');
 const express = require('express');
-const MessagingResponse = twilio.twiml.MessagingResponse;
+const MessagingResponse = require("twilio").twiml.MessagingResponse;
 
 const app = express();
 
