@@ -4,8 +4,7 @@
 	"version": "0.0.0",
 	"main": "bot.js",
 	"scripts": {
-		"start": "node bot.js",
-		"server": "node server.js"
+		"start": "node bot.js"
 	},
 	"dependencies": {
 		"discord.js": "11.4.0",
@@ -13,6 +12,7 @@
 		"request": "2.88.0",
 		"cron": "1.4.1",
 		"express": "4.17.1",
-		"twilio": "3.33.4"
+		"twilio": "3.33.4",
+		"xml2js": "0.4.19"
 	}
 }
