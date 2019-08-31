@@ -23,7 +23,7 @@ module.exports = class SMSCommand extends Command{
 
 	process(msg, suffix){
 		const number = suffix.split(" ")[0];
-		const text = suffix.split(" ")[1];
+		const text = suffix.slice(number.length + 1);
 
 		twilio.messages.create({
 			body: text,
