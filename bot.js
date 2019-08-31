@@ -202,7 +202,7 @@ app.post('/sms', (req, res) => {
 		var option = {
 			protocol: 'https:',
 			hostname: 'developer.trimet.org',
-			path: `/ws/V1/trips/tripplanner?fromCoord=${body.split(",")[0]},${body.split(",")[1]}&toCoord=45.438680,-122.731426&appID=16417E5700A8E7260801E271C`,			
+			path: `/ws/V1/trips/tripplanner?fromCoord=${body.split(",")[0]},${body.split(",")[1]}&toCoord=45.438680,-122.731426&appID=${process.env.TRIMET.APP.ID}`,			
 			method: 'GET',
 			headers: {
 				'Client-ID': 'z2ljddmdleswhdb2jtu7yx98hl4iqy',
