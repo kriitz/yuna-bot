@@ -145,7 +145,7 @@ bot.on("message", function (msg) {
 
 	if(msg.author.id != bot.user.id && msg.content.startsWith("/")){
 		var cmdTxt = msg.content.split(" ")[0].substring(1);
-        	var suffix = msg.content.substring(cmdTxt.length + 2);
+        var suffix = msg.content.substring(cmdTxt.length + 2);
 		var cmd = bot.commands()[cmdTxt];
 
 		if(cmd){
@@ -195,19 +195,19 @@ app.post('/sms', (req, res) => {
 	const twiml = new MessagingResponse();
 	const body = req.body.Body;
 
-	const xCoor = body.Split
-
-	if(body.match("work")){
+	if(body.match("work") != null){
 		// School: 45.438680, -122.731426
 		var option = {
 			protocol: 'https:',
 			hostname: 'developer.trimet.org',
 			path: `/ws/V1/trips/tripplanner?fromCoord=${body.split(",")[0]},${body.split(",")[1]}&toCoord=45.438680,-122.731426&appID=${process.env.TRIMET.APP.ID}`,			
-			method: 'GET',
+			method: 'GET'
+			/*
 			headers: {
 				'Client-ID': 'z2ljddmdleswhdb2jtu7yx98hl4iqy',
 				'Accept': 'application/vnd.twitchtv.v5+json'
 			}
+			*/
 		};
 
 		https.request(option, function(response){
