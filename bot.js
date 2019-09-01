@@ -15,6 +15,8 @@ const botId = '504996285900783638';				// Check
 const guildId = '393936202123968513';				// Check
 const MEMBER_ROLE = '505583948169084929';			// Check
 const INIT_CHANNEL_ID = '578376730092240897';			// Check
+const TEXT_CHANNEL_ID = '505595460078272517';
+const BOT_CHANNEL_ID = '578797079896391680';
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const HelpCommand = require('./src/commands/help.js');
@@ -50,8 +52,8 @@ bot.once("ready", function () {
 	const guild = bot.guilds.get(guildId);
 	const member = guild.members.get(botId);
 	
-	mainChannel = guild.channels.find("name", "text"); 		// *Check this when editing channel names
-	testChannel = guild.channels.find("name", "test-bot");
+	mainChannel = guild.channels.get(TEXT_CHANNEL_ID); 		// *Check this when editing channel names
+	testChannel = guild.channels.get(BOT_CHANNEL_ID);
 	initChannel = guild.channels.get(INIT_CHANNEL_ID);
 	
 	if(mainChannel == null){
@@ -179,10 +181,10 @@ bot.on("message", function (msg) {
 process.on('uncaughtException', function(err) {
 	if (err.code == 'ECONNRESET') {
 		console.log('Got an ECONNRESET! This is *probably* not an error. Stacktrace:');
-		mainChannel.send(err.stack);
+		console.log(err.stack);
 	} else {
-		mainChannel.send(err);
-		mainChannel.send(err.stack);
+		console.log(err);
+		console.log(err.stack);
 		process.exit(0);
 	}
 });
