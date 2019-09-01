@@ -201,10 +201,14 @@ app.post('/sms', (req, res) => {
 
 	if(body.match("work") != null){
 		// School: 45.438680, -122.731426
+
+		console.log(`Body: ${body}`);
+		console.log(body.split(",")[0], body.split(",")[1].split(" ")[0]);
+
 		var option = {
 			protocol: 'https:',
 			hostname: 'developer.trimet.org',
-			path: `/ws/V1/trips/tripplanner?fromCoord=${body.split(",")[0]},${body.split(",")[1]}&toCoord=45.438680,-122.731426&appID=${process.env.TRIMET_APP_ID}`,			
+			path: `/ws/V1/trips/tripplanner?fromCoord=${body.split(",")[0]},${body.split(",")[1].split(" ")[0]}&toCoord=45.438680,-122.731426&appID=${process.env.TRIMET_APP_ID}`,			
 			method: 'GET'
 			/*
 			headers: {
