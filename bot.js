@@ -8,6 +8,7 @@ const Yuna = require("./src/client.js");
 const cron = require("cron").CronJob;
 const https = require("https");
 const util = require('util');
+const newRelic = require('newrelic');
 const bodyParser = require('body-parser');
 const parseString = require('xml2js').parseString;
 
@@ -209,7 +210,7 @@ app.post('/sms', (req, res) => {
 		var option = {
 			protocol: 'https:',
 			hostname: 'developer.trimet.org',
-			path: `/ws/V1/trips/tripplanner?fromCoord=${body.split(",")[0]},${body.split(",")[1].split(" ")[0]}&toCoord=45.438680,-122.731426&appID=${process.env.TRIMET_APP_ID}`,			
+			path: `/ws/V1/trips/tripplanner?fromCoord=${body.split(",")[0]},${body.split(",")[1].split(" ")[0]}&toCoord=45.438679,-122.731423&appID=${process.env.TRIMET_APP_ID}`,			
 			method: 'GET'
 			/*
 			headers: {
