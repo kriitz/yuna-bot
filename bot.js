@@ -58,11 +58,11 @@ bot.once("ready", function () {
 	initChannel = guild.channels.get(INIT_CHANNEL_ID);
 	
 	if(mainChannel == null){
-		bot.user.setGame("Error: Main channel not found.");
+		bot.user.setActivity('Developing', { type: 'WATCHING' });
 	}else{
 		//bot.user.setUsername("Yuna");
 		testChannel.send("Ready to go.");
-		bot.user.setGame("Witchcraft | /help");
+		bot.user.setActivity('Witchcraft', { type: 'WATCHING' });
 	}
 
 	const rawCommands = [
