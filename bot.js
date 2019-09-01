@@ -227,7 +227,7 @@ app.post('/sms', (req, res) => {
 			response.on('end', function () {
 				if (data){
 					parseString(data, function (err, result) {
-					    console.log(result);
+					    console.dir(result);
 					});
 				}else{
 					console.log("No data from trimet!");
