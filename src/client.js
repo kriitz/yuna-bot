@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const firebase = require("firebase");
-const bodyParser = require('body-parser');
 const twilioClient = require("twilio")(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const config = {

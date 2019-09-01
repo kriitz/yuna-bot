@@ -7,6 +7,7 @@
 const Yuna = require("./src/client.js");
 const cron = require("cron").CronJob;
 const https = require("https");
+const bodyParser = require('body-parser');
 const parseString = require('xml2js').parseString;
 
 // const
