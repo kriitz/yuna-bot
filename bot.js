@@ -45,11 +45,13 @@ var mainChannel = null;
 var testChannel = null;
 var initChannel = null;
 
+/*
 const http = require('http');
 const express = require('express');
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 
 const app = express();
+*/
 
 bot.once("ready", function () {
 	const guild = bot.guilds.get(guildId);
@@ -81,7 +83,7 @@ bot.once("ready", function () {
 		AwaitCommand,
 		SetIntroCommand,
 		SetLinkCommand,
-		SMSCommand,
+		//SMSCommand,
   	];
   
 	bot.initializeCommands(rawCommands);
@@ -195,6 +197,7 @@ process.on('uncaughtException', function(err) {
 process.env.TZ = "America/Los_Angeles";
 bot.login(process.env.BOT_TOKEN);
 
+/*
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/sms', (req, res) => {
@@ -212,12 +215,12 @@ app.post('/sms', (req, res) => {
 			hostname: 'developer.trimet.org',
 			path: `/ws/V1/trips/tripplanner?fromCoord=${body.split(",")[0]},${body.split(",")[1].split(" ")[0]}&toCoord=45.438679,-122.731423&appID=${process.env.TRIMET_APP_ID}`,			
 			method: 'GET'
-			/*
+			
 			headers: {
 				'Client-ID': 'z2ljddmdleswhdb2jtu7yx98hl4iqy',
 				'Accept': 'application/vnd.twitchtv.v5+json'
 			}
-			*/
+			
 		};
 
 		https.request(option, function(response){
@@ -249,3 +252,6 @@ console.log(`Attempting to connect to port: ${process.env.PORT}...`);
 http.createServer(app).listen(process.env.PORT || 80, () => {
 	console.log(`Express server listening on port: ${process.env.PORT}`);
 });
+
+*/
+

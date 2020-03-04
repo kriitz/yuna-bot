@@ -31,6 +31,15 @@ module.exports = class SMSCommand extends Command{
 			to: `+${number}`
 		}).then(message => console.log(message.sid));
 
+		// -1000, 500
+		// -5, -25 Nether Portal in Nether
+		// -125, 76, -70
+
+		// x% of y = y% of x
+		// -900, 1500 END PROTAL HOME
+		// -1100, 3900 END PROTAL HOME
+		// 389, 16, 251 Zombie Spawner 1
+
 		msg.delete();
 
 		return 'Message sent!'
