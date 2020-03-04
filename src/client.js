@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const firebase = require("firebase");
-const twilioClient = require("twilio")(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+// const twilioClient = require("twilio")(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const config = {
 	apiKey: process.env.FIREBASE_TOKEN,
