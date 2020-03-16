@@ -4,11 +4,9 @@
 
 	- Programmed by Philip "Kritz" Nguyen
 */
-const newRelic = require('newrelic');
 const Yuna = require("./src/client.js");
 const cron = require("cron").CronJob;
 const https = require("https");
-const util = require('util');
 const bodyParser = require('body-parser');
 const parseString = require('xml2js').parseString;
 
@@ -81,7 +79,7 @@ bot.once("ready", function () {
 		WipeCommand,
 		AwaitCommand,
 		SetIntroCommand,
-		SetLinkCommand,
+		SetLinkCommand
   	];
   
 	bot.initializeCommands(rawCommands);
@@ -194,62 +192,3 @@ process.on('uncaughtException', function(err) {
 
 process.env.TZ = "America/Los_Angeles";
 bot.login(process.env.BOT_TOKEN);
-
-/*
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.post('/sms', (req, res) => {
-	const twiml = new MessagingResponse();
-	const body = req.body.Body;
-
-	if(body.match("work") != null){
-		// School: 45.438680, -122.731426
-
-		console.log(`Body: ${body}`);
-		console.log(body.split(",")[0], body.split(",")[1].split(" ")[0]);
-
-		var option = {
-			protocol: 'https:',
-			hostname: 'developer.trimet.org',
-			path: `/ws/V1/trips/tripplanner?fromCoord=${body.split(",")[0]},${body.split(",")[1].split(" ")[0]}&toCoord=45.438679,-122.731423&appID=${process.env.TRIMET_APP_ID}`,			
-			method: 'GET'
-			
-			headers: {
-				'Client-ID': 'z2ljddmdleswhdb2jtu7yx98hl4iqy',
-				'Accept': 'application/vnd.twitchtv.v5+json'
-			}
-			
-		};
-
-		https.request(option, function(response){
-			var data = '';
-
-			response.on('error', (error) => { console.log(error); });
-			response.on('data', (chunk) => { data += chunk; });
-
-			response.on('end', function () {
-				if (data){
-					parseString(data, function (err, result) {
-					    console.log(util.inspect(result, false, null));
-					});
-				}else{
-					console.log("No data from trimet!");
-				}
-			});
-		}).end();
-	}
-
-	twiml.message('The Robots are coming! Head for the hills!');
-
-	res.writeHead(200, {'Content-Type': 'text/xml'});
-	res.end(twiml.toString());
-});
-
-console.log(`Attempting to connect to port: ${process.env.PORT}...`);
-
-http.createServer(app).listen(process.env.PORT || 80, () => {
-	console.log(`Express server listening on port: ${process.env.PORT}`);
-});
-
-*/
-
