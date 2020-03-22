@@ -7,17 +7,15 @@
 const Yuna = require("./src/client.js");
 const cron = require("cron").CronJob;
 const https = require("https");
-const bodyParser = require('body-parser');
-const parseString = require('xml2js').parseString;
 
-// const
-const OWNER_ID = '89488149201326080';
-const botId = '504996285900783638';				// Check
-const guildId = '393936202123968513';				// Check
-const MEMBER_ROLE = '505583948169084929';			// Check
+// CONST //
+const OWNER_ID = '89488149201326080';					// Check
+const botId = '504996285900783638';						// Check
+const guildId = '393936202123968513';					// Check
+const MEMBER_ROLE = '505583948169084929';				// Check
 const INIT_CHANNEL_ID = '578376730092240897';			// Check
-const TEXT_CHANNEL_ID = '505595460078272517';
-const BOT_CHANNEL_ID = '578797079896391680';
+const TEXT_CHANNEL_ID = '505595460078272517';			// Check
+const BOT_CHANNEL_ID = '578797079896391680';			// Check
 
 // [[ Imports ]] const  = require('./src/commands/.js');
 const HelpCommand = require('./src/commands/help.js');
