@@ -22,9 +22,7 @@ const HelpCommand = require('./src/commands/help.js');
 const WarnCommand = require('./src/commands/warn.js');
 const CommandsCommand = require('./src/commands/commands.js');
 const EventsCommand = require('./src/commands/events.js');
-const VersionCommand = require('./src/commands/version.js');
 const HowCommand = require('./src/commands/how.js');
-const happyBirthDayCommand = require('./src/commands/happyBirthDay.js');
 const AddEventCommand = require('./src/commands/addevent.js');
 const WipeCommand = require('./src/commands/wipe.js');
 const RemoveEventCommand = require('./src/commands/removeevent.js');
@@ -70,9 +68,7 @@ bot.once("ready", function () {
 		InfoCommand,
 		CommandsCommand,
 		EventsCommand,
-		VersionCommand,
 		HowCommand,
-		happyBirthDayCommand,
 		AddEventCommand,
 		WipeCommand,
 		AwaitCommand,
