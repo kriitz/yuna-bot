@@ -50,14 +50,13 @@ bot.once("ready", function () {
 	const guild = bot.guilds.get(guildId);
 	const member = guild.members.get(botId);
 	
-	mainChannel = guild.channels.get(TEXT_CHANNEL_ID); 		// *Check this when editing channel names
+	mainChannel = guild.channels.get(TEXT_CHANNEL_ID);
 	testChannel = guild.channels.get(BOT_CHANNEL_ID);
 	initChannel = guild.channels.get(INIT_CHANNEL_ID);
 	
 	if(mainChannel == null){
 		bot.user.setActivity('Developing', { type: 'WATCHING' });
 	}else{
-		//bot.user.setUsername("Yuna");
 		testChannel.send("Ready to go.");
 		bot.user.setActivity('Witchcraft', { type: 'WATCHING' });
 	}
@@ -97,20 +96,7 @@ bot.once("ready", function () {
 	}, null, true, "America/Los_Angeles");
 	*/
 });
-/*
-bot.on("messageReactionAdd", function (reaction, user){
-	var message = reaction.message;
-	var op = message.author;
-	if(user == op) return
 
-	if(reaction.emoji.name == "star"){
-		bot.database.ref(`bot/${guildId}/users/${op.id}/reputation`).once(){
-			var rep = snapshot.val();
-			rep = 
-		}
-	}
-});
-*/
 bot.on("guildMemberAdd", function (member){
 	const data = bot.database.ref(`bot/${guildId}/awaits`);
 
