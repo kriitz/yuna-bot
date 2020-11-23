@@ -5,12 +5,12 @@ module.exports = class CommandsCommand extends Command{
 		super(bot, {
 			name: 'commands',
 			alias: [
-				'cmds'
+			"cmds"
 			],
 			usage: '',
 			options: [
 			],
-			description: 'Displays all commands available to you',
+			description: 'Sends all commands available to user',
 		});
 	}
 
@@ -27,7 +27,9 @@ module.exports = class CommandsCommand extends Command{
 	
     	for(var cmd in commands){
     		if (commands[cmd].hasPermission(msg) && printedCmds.includes(commands[cmd]) == false){
-			printedCmds.push(commands[cmd]);
+    			console.log("Commands searching: " + commands[cmd]);
+
+				printedCmds.push(commands[cmd]);
 	    		info += "**" + cmd + ":**";
 	    		/*
 	    		var usage = commands[cmd].get('usage');
@@ -38,6 +40,6 @@ module.exports = class CommandsCommand extends Command{
     		}
     	}
     	msg.author.send(info);
-    	return
+    	return;
 	}
 }
