@@ -25,19 +25,19 @@ module.exports = class MoveCommand extends Command{
 		var newMessage = "";
 
 		var movingMessage = suffix.split(" ")[0];
-		movingMessage = msg.channel.messages.fetch(movingMessage);
-		if (movingMessage == null) return 'No valid message was found';
+		movingMessage = msg.channel.messages.fetch(movingMessage).then(message => {
+			if (movingMessage == null) return 'No valid message was found';
+			var channel = msg.mentions.channels.first();
+			if (channel == null) return 'No channel was mentioned in this message';
 
-		var channel = msg.mentions.channels.first();
-		if (channel == null) return 'No channel was mentioned in this message';
+			newMessage = `${movingMessage.author.username}:\n${movingMessage.content}`;
+			for (var attach of movingMessage.attachments.values()){
+				newMessage += `\n ${attach.url}`;
+			}
 
-		newMessage = `${movingMessage.author.username}:\n${movingMessage.content}`;
-		for (var attach of movingMessage.attachments.values()){
-			newMessage += `\n ${attach.url}`;
-		}
-
-		movingMessage.delete();
-		channel.send(newMessage);
+			movingMessage.delete();
+			channel.send(newMessage);			
+		});
 		return;
 	}
 }
