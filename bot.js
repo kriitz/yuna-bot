@@ -38,21 +38,13 @@ var mainChannel = null;
 var testChannel = null;
 var initChannel = null;
 
-/*
-const http = require('http');
-const express = require('express');
-const MessagingResponse = require("twilio").twiml.MessagingResponse;
-
-const app = express();
-*/
-
 bot.once("ready", function () {
-	const guild = bot.guilds.get(guildId);
-	const member = guild.members.get(botId);
+	const guild = bot.guilds.cache.get(guildId);
+	const member = guild.members.cache.get(botId);
 	
-	mainChannel = guild.channels.get(TEXT_CHANNEL_ID);
-	testChannel = guild.channels.get(BOT_CHANNEL_ID);
-	initChannel = guild.channels.get(INIT_CHANNEL_ID);
+	mainChannel = guild.channels.cache.get(TEXT_CHANNEL_ID);
+	testChannel = guild.channels.cache.get(BOT_CHANNEL_ID);
+	initChannel = guild.channels.cache.get(INIT_CHANNEL_ID);
 	
 	if(mainChannel == null){
 		bot.user.setActivity('Developing', { type: 'WATCHING' });
@@ -104,7 +96,7 @@ bot.on("guildMemberAdd", function (member){
 		snapshot.forEach(function(cSnapshot){
 			let awaiting = cSnapshot.val();
 			if(member.id == awaiting.id){
-				member.addRole(MEMBER_ROLE);
+				member.roles.add(MEMBER_ROLE);
 				member.send("We were waiting for you! You have been automatically added to our system and we also skipped your background checks! Welcome to the team.");
 				mainChannel.send(`<@${member.id}>, ${awaiting.message}`);
 
@@ -121,7 +113,7 @@ bot.on("message", function (msg) {
 	
 	if(msg.author.id != OWNER_ID){
 		if(msg.channel == initChannel){
-			if(msg.content.toLowerCase().match("agree")) msg.member.addRole(MEMBER_ROLE);
+			if(msg.content.toLowerCase().match("agree")) msg.member.roles.add(MEMBER_ROLE);
 			msg.delete();
 			return;
 		}
