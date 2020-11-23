@@ -38,7 +38,7 @@ module.exports = class CommandsCommand extends Command{
 	    		info += " " + commands[cmd].description + "\n";
     		}
     	}
-    	msg.author.send(info);
-    	return;
+
+    	return info;
 	}
 }
