@@ -32,6 +32,8 @@ const InfoCommand = require('./src/commands/info.js');
 const SetIntroCommand = require('./src/commands/setintro.js');
 const SetLinkCommand = require('./src/commands/setlink.js');
 
+const MoveCommand = require('./src/commands/move.js');
+
 const bot = new Yuna();
 
 var mainChannel = null;
@@ -64,7 +66,8 @@ bot.once("ready", function () {
 		WipeCommand,
 		AwaitCommand,
 		SetIntroCommand,
-		SetLinkCommand
+		SetLinkCommand,
+		MoveCommand
   	];
   
 	bot.initializeCommands(rawCommands);
