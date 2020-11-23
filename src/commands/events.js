@@ -16,7 +16,7 @@ module.exports = class EventsCommand extends Command{
 
 	//Access
 	hasPermission(msg){
-		return msg.member.hasPermission("CREATE_INSTANT_INVITE");
+		return true;
 	}
 
 	/**
