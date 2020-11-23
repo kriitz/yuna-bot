@@ -25,7 +25,7 @@ module.exports = class MoveCommand extends Command{
 		var newMessage = "";
 
 		var movingMessage = suffix.split(" ")[0];
-		movingMessage = msg.channel.messages.cache.get(movingMessage);
+		movingMessage = msg.channel.messages.fetch(movingMessage);
 		if (movingMessage == null) return 'No valid message was found';
 
 		var channel = msg.mentions.channels.first();
