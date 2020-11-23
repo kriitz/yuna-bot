@@ -31,16 +31,13 @@ module.exports = class MoveCommand extends Command{
 		var channel = msg.mentions.channels.first();
 		if (channel == null) return 'No channel was mentioned in this message';
 
-		newMessage = movingMessage.content;
+		newMessage = `${movingMessage.author.username}:\n${movingMessage.content}`;
 		for (var attach of movingMessage.attachments.values()){
-			console.log(attach.url);
 			newMessage += `\n ${attach.url}`;
 		}
 
+		movingMessage.delete();
 		channel.send(newMessage);
-
-		console.log(movingMessage.attachments.concat);
-		console.log(movingMessage.embeds.concat)
 		return;
 	}
 }
