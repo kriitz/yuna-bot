@@ -26,9 +26,8 @@ module.exports = class CommandsCommand extends Command{
 		var printedCmds = [];
 	
     	for(var cmd in commands){
+    		console.log("Commands searching: " + commands[cmd].name);
     		if (commands[cmd].hasPermission(msg) && printedCmds.includes(commands[cmd]) == false){
-    			console.log("Commands searching: " + commands[cmd]);
-
 				printedCmds.push(commands[cmd]);
 	    		info += "**" + cmd + ":**";
 	    		/*
